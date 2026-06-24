@@ -13,9 +13,10 @@
     font-family: monospace;
     height: 100vh;
     display: flex;
+    flex-direction: row;
   }
 
-  /* Colonna sinistra: Pinguino */
+  /* SINISTRA: Pinguino */
   #left {
     width: 50%;
     display: flex;
@@ -32,7 +33,7 @@
     box-shadow: 0 0 20px #0f0;
   }
 
-  /* Colonna destra: Orologio + Countdown */
+  /* DESTRA: Orologio + Countdown */
   #right {
     width: 50%;
     display: flex;
@@ -71,4 +72,23 @@ function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, "0");
   const m = String(now.getMinutes()).padStart(2, "0");
-  const s = String
+  const s = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+}
+
+function updateCountdown() {
+  const today = new Date();
+  const christmas = new Date(today.getFullYear(), 11, 25);
+  const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").textContent =
+    `🎄 Meno ${diff} Giorni a Natale`;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+updateCountdown();
+setInterval(updateCountdown, 1000 * 60 * 60);
+</script>
+
+</body>
+</html>
