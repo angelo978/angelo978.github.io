@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Angelo978 – Orologio</title>
+<title>Angelo978 – Orologio e Countdown</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -15,18 +15,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
+
+  #penguin {
+    margin-bottom: 20px;
+  }
+
+  #penguin img {
+    width: 40vw;
+    max-width: 400px;
+    border: 3px solid #0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #0f0;
+  }
+
   #clock {
-    font-size: 8vw;
+    font-size: 6vw;
     letter-spacing: 4px;
     text-shadow: 0 0 20px #0f0;
+    margin-top: 10px;
+  }
+
+  #countdown {
+    font-size: 3vw;
+    margin-top: 10px;
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
   }
 </style>
-
 </head>
 <body>
 
+<div id="penguin">
+  <img src="pinguino.jpg" alt="Pinguino del giorno">
+</div>
+
 <div id="clock">00:00:00</div>
+<div id="countdown">🎄 Meno 000 Giorni a Natale</div>
 
 <script>
 function updateClock() {
@@ -36,8 +62,18 @@ function updateClock() {
   const s = String(now.getSeconds()).padStart(2, "0");
   document.getElementById("clock").textContent = `${h}:${m}:${s}`;
 }
+
+function updateCountdown() {
+  const today = new Date();
+  const christmas = new Date(today.getFullYear(), 11, 25);
+  const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").textContent = `🎄 Meno ${diff} Giorni a Natale`;
+}
+
 setInterval(updateClock, 1000);
 updateClock();
+updateCountdown();
+setInterval(updateCountdown, 1000 * 60 * 60); // aggiorna ogni ora
 </script>
 
 </body>
