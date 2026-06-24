@@ -16,32 +16,30 @@
     flex-direction: row;
   }
 
-  /* SINISTRA: Pinguino */
-  #left {
-    width: 50%;
+  /* Contenitori principali */
+  #left, #right {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  /* Linea divisoria */
+  #left {
     border-right: 2px solid #0f0;
   }
 
+  /* Immagine pinguino */
   #left img {
-    width: 80%;
-    max-width: 450px;
+    width: 90%;
+    height: auto;
+    max-width: 600px;
     border: 3px solid #0f0;
     border-radius: 10px;
     box-shadow: 0 0 20px #0f0;
   }
 
-  /* DESTRA: Orologio + Countdown */
-  #right {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
+  /* Orologio */
   #clock {
     font-size: 6vw;
     letter-spacing: 4px;
@@ -49,9 +47,27 @@
     margin-bottom: 20px;
   }
 
+  /* Countdown */
   #countdown {
     font-size: 3vw;
     text-shadow: 0 0 10px #0f0;
+  }
+
+  /* Modalità telefono: impila tutto */
+  @media (max-width: 800px) {
+    body {
+      flex-direction: column;
+    }
+    #left {
+      border-right: none;
+      border-bottom: 2px solid #0f0;
+    }
+    #clock {
+      font-size: 12vw;
+    }
+    #countdown {
+      font-size: 6vw;
+    }
   }
 </style>
 </head>
@@ -63,8 +79,10 @@
 </div>
 
 <div id="right">
-  <div id="clock">00:00:00</div>
-  <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
+  <div>
+    <div id="clock">00:00:00</div>
+    <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
+  </div>
 </div>
 
 <script>
