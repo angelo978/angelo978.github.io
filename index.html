@@ -10,13 +10,12 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* NESSUNO SCROLL */
+    overflow: hidden;
     background: #000;
     color: #0f0;
     font-family: monospace;
   }
 
-  /* Contenitore principale */
   #container {
     display: flex;
     height: 100%;
@@ -25,7 +24,8 @@
 
   /* SINISTRA: Pinguino */
   #left {
-    flex: 1;
+    width: 50%;
+    min-width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,8 +34,9 @@
   }
 
   #left img {
-    max-width: 95%;
-    max-height: 95%;
+    width: 90%;
+    height: auto;
+    max-height: 90%;
     object-fit: contain;
     border: 3px solid #0f0;
     border-radius: 10px;
@@ -44,26 +45,25 @@
 
   /* DESTRA: Orologio + Countdown */
   #right {
-    flex: 1;
+    width: 50%;
+    min-width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* ORA STA IN ALTO */
+    justify-content: flex-start;
     align-items: center;
-    padding-top: 3vh; /* margine dall'alto */
-    overflow: hidden;
+    padding-top: 4vh;
   }
 
   #clock {
-    font-size: 4.5vw; /* più piccolo per evitare scroll */
+    font-size: 3.5vw; /* RIDOTTO per non rompere il layout */
     letter-spacing: 4px;
     text-shadow: 0 0 20px #0f0;
     margin-bottom: 20px;
   }
 
   #countdown {
-    font-size: 2vw; /* più piccolo per stare dentro */
+    font-size: 1.8vw; /* RIDOTTO */
     text-shadow: 0 0 10px #0f0;
-    margin-top: 10px;
   }
 </style>
 </head>
@@ -96,15 +96,4 @@ function updateCountdown() {
   const today = new Date();
   const christmas = new Date(today.getFullYear(), 11, 25);
   const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
-  document.getElementById("countdown").textContent =
-    `🎄 Meno ${diff} Giorni a Natale`;
-}
-
-setInterval(updateClock, 1000);
-updateClock();
-updateCountdown();
-setInterval(updateCountdown, 1000 * 60 * 60);
-</script>
-
-</body>
-</html>
+  document.getElementById("
