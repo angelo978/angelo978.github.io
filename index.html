@@ -121,4 +121,25 @@
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, "0");
-  const m = String(now.getMinutes()).padStart
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+}
+
+function updateCountdown() {
+  const today = new Date();
+  const christmas = new Date(today.getFullYear(), 11, 25);
+  const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
+
+  document.getElementById("count1").textContent = `🎄 Meno ${diff}`;
+  document.getElementById("count2").textContent = `Giorni a Natale`;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+updateCountdown();
+setInterval(updateCountdown, 1000 * 60 * 60);
+</script>
+
+</body>
+</html>
