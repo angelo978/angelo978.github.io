@@ -13,68 +13,62 @@
     font-family: monospace;
     height: 100vh;
     display: flex;
+  }
+
+  /* Colonna sinistra: Pinguino */
+  #left {
+    width: 50%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    border-right: 2px solid #0f0;
   }
 
-  #penguin {
-    margin-bottom: 20px;
-  }
-
-  #penguin img {
-    width: 40vw;
-    max-width: 400px;
+  #left img {
+    width: 80%;
+    max-width: 450px;
     border: 3px solid #0f0;
     border-radius: 10px;
     box-shadow: 0 0 20px #0f0;
+  }
+
+  /* Colonna destra: Orologio + Countdown */
+  #right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   #clock {
     font-size: 6vw;
     letter-spacing: 4px;
     text-shadow: 0 0 20px #0f0;
-    margin-top: 10px;
+    margin-bottom: 20px;
   }
 
   #countdown {
     font-size: 3vw;
-    margin-top: 10px;
-    color: #0f0;
     text-shadow: 0 0 10px #0f0;
   }
 </style>
 </head>
+
 <body>
 
-<div id="penguin">
+<div id="left">
   <img src="pinguino.png" alt="Pinguino del giorno">
 </div>
 
-<div id="clock">00:00:00</div>
-<div id="countdown">🎄 Meno 000 Giorni a Natale</div>
+<div id="right">
+  <div id="clock">00:00:00</div>
+  <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
+</div>
 
 <script>
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, "0");
   const m = String(now.getMinutes()).padStart(2, "0");
-  const s = String(now.getSeconds()).padStart(2, "0");
-  document.getElementById("clock").textContent = `${h}:${m}:${s}`;
-}
-
-function updateCountdown() {
-  const today = new Date();
-  const christmas = new Date(today.getFullYear(), 11, 25);
-  const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
-  document.getElementById("countdown").textContent = `🎄 Meno ${diff} Giorni a Natale`;
-}
-
-setInterval(updateClock, 1000);
-updateClock();
-updateCountdown();
-setInterval(updateCountdown, 1000 * 60 * 60); // aggiorna ogni ora
-</script>
-
-</body>
-</html>
+  const s = String
