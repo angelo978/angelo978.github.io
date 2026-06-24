@@ -65,3 +65,46 @@
     text-shadow: 0 0 10px #0f0;
     margin-top: 10px;
   }
+</style>
+</head>
+
+<body>
+
+<div id="container">
+
+  <div id="left">
+    <img src="pinguino.png" alt="Pinguino del giorno">
+  </div>
+
+  <div id="right">
+    <div id="clock">00:00:00</div>
+    <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
+  </div>
+
+</div>
+
+<script>
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, "0");
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+  document.getElementById("clock").textContent = `${h}:${m}:${s}`;
+}
+
+function updateCountdown() {
+  const today = new Date();
+  const christmas = new Date(today.getFullYear(), 11, 25);
+  const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").textContent =
+    `🎄 Meno ${diff} Giorni a Natale`;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+updateCountdown();
+setInterval(updateCountdown, 1000 * 60 * 60);
+</script>
+
+</body>
+</html>
