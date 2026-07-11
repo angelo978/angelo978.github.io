@@ -13,7 +13,7 @@
     background: #000;
     color: #0f0;
     font-family: monospace;
-    overflow: hidden; /* niente scroll su PC */
+    overflow: hidden;
   }
 
   /* MENU IN CIMA */
@@ -41,26 +41,11 @@
     display: flex;
     height: 100%;
     width: 100%;
-    margin-top: 80px; /* spazio per il menu */
+    margin-top: 80px;
   }
 
-  /* SINISTRA: PINGUINO */
+  /* SINISTRA: TESTI */
   #left {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  #left img {
-    max-width: 90%;
-    max-height: 90%;
-    object-fit: contain;
-  }
-
-  /* DESTRA: OROLOGIO + COUNTDOWN */
-  #right {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -87,11 +72,28 @@
     margin-top: 5px;
   }
 
+  /* DESTRA: FOTO */
+  #right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  #right img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    border: 2px solid #0f0;
+    box-shadow: 0 0 20px #0f0;
+  }
+
   /* SMARTPHONE */
   @media (max-width: 800px) {
 
     html, body {
-      overflow: auto; /* sul telefono scroll ok */
+      overflow: auto;
     }
 
     #container {
@@ -115,7 +117,7 @@
       font-size: 6vw;
     }
 
-    #left img {
+    #right img {
       max-height: 50vh;
     }
 
@@ -138,19 +140,22 @@
 
 <div id="container">
 
+  <!-- SINISTRA: OROLOGIO + COUNTDOWN -->
   <div id="left">
-    <img src="pinguino.png" alt="Pinguino del giorno">
-  </div>
-
-  <div id="right">
     <div id="clock">00:00:00</div>
     <div id="count1">🎄 Meno 000</div>
     <div id="count2">Giorni a Natale</div>
   </div>
 
+  <!-- DESTRA: FOTO AUTOMATICA -->
+  <div id="right">
+    <img id="fotoPinguino" src="" alt="Pinguino del giorno">
+  </div>
+
 </div>
 
 <script>
+/* OROLOGIO */
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, "0");
@@ -159,6 +164,7 @@ function updateClock() {
   document.getElementById("clock").textContent = `${h}:${m}:${s}`;
 }
 
+/* COUNTDOWN */
 function updateCountdown() {
   const today = new Date();
   const christmas = new Date(today.getFullYear(), 11, 25);
@@ -168,10 +174,30 @@ function updateCountdown() {
   document.getElementById("count2").textContent = `Giorni a Natale`;
 }
 
+/* FOTO AUTOMATICA */
+function caricaUltimaFoto() {
+  let max = 0;
+
+  for (let i = 1; i <= 300; i++) {
+    const url = `foto/pinguino${i}.png`;
+    const img = new Image();
+    img.src = url;
+
+    img.onload = () => {
+      if (i > max) {
+        max = i;
+        document.getElementById("fotoPinguino").src = url;
+      }
+    };
+  }
+}
+
 setInterval(updateClock, 1000);
 updateClock();
 updateCountdown();
 setInterval(updateCountdown, 1000 * 60 * 60);
+
+caricaUltimaFoto();
 </script>
 
 </body>
