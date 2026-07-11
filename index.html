@@ -16,26 +16,25 @@
     overflow: hidden;
   }
 
-  /* CONTENITORE PRINCIPALE */
   #container {
     display: flex;
     height: 100%;
     width: 100%;
   }
 
-  /* SINISTRA: MENU + TESTI */
+  /* SINISTRA */
   #left {
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* CENTRATO */
+    justify-content: center;
     align-items: center;
     overflow: hidden;
   }
 
   /* MENU SINISTRA */
   #leftmenu {
-    margin-bottom: 50px; /* DISTACCO DAL COUNTDOWN */
+    margin-bottom: 50px;
   }
 
   #leftmenu a {
@@ -44,6 +43,7 @@
     margin: 0 20px;
     font-size: 2vw;
     text-shadow: 0 0 10px #0f0;
+    cursor: pointer;
   }
 
   #clock {
@@ -63,7 +63,7 @@
     margin-top: 5px;
   }
 
-  /* DESTRA: FOTO */
+  /* DESTRA */
   #right {
     width: 50%;
     display: flex;
@@ -79,7 +79,6 @@
     border: 2px solid #0f0;
     box-shadow: 0 0 20px #0f0;
   }
-
 </style>
 </head>
 
@@ -90,11 +89,11 @@
   <!-- SINISTRA -->
   <div id="left">
 
-    <!-- MENU SINISTRA -->
     <div id="leftmenu">
       <a href="storia.html">Storia</a>
       <a href="episodi.html">Episodi</a>
       <a href="special.html">Special</a>
+      <a id="playButton">Play</a>
     </div>
 
     <div id="clock">00:00:00</div>
@@ -129,7 +128,7 @@ function updateCountdown() {
   document.getElementById("count2").textContent = `Giorni a Natale`;
 }
 
-/* FOTO AUTOMATICA */
+/* FOTO DEL GIORNO */
 function caricaUltimaFoto() {
   let max = 0;
 
@@ -147,6 +146,37 @@ function caricaUltimaFoto() {
   }
 }
 
+/* SLIDESHOW */
+let slideshowRunning = false;
+let slideshowIndex = 1;
+let slideshowTimer = null;
+
+function startSlideshow() {
+  if (slideshowRunning) return;
+  slideshowRunning = true;
+
+  slideshowIndex = 1;
+
+  slideshowTimer = setInterval(() => {
+    const url = `foto/pinguino${slideshowIndex}.png`;
+    const img = new Image();
+    img.src = url;
+
+    img.onload = () => {
+      document.getElementById("fotoPinguino").src = url;
+      slideshowIndex++;
+    };
+
+    img.onerror = () => {
+      slideshowIndex = 1; // ricomincia da capo
+    };
+
+  }, 7000); // 7 secondi
+}
+
+document.getElementById("playButton").addEventListener("click", startSlideshow);
+
+/* AVVIO */
 setInterval(updateClock, 1000);
 updateClock();
 updateCountdown();
