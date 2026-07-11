@@ -16,32 +16,11 @@
     overflow: hidden;
   }
 
-  /* MENU IN CIMA */
-  #topmenu {
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-    background: #000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-  }
-
-  #topmenu a {
-    color: #0f0;
-    text-decoration: none;
-    margin: 0 30px;
-    font-size: 2vw;
-    text-shadow: 0 0 10px #0f0;
-  }
-
   /* CONTENITORE PRINCIPALE */
   #container {
     display: flex;
     height: 100%;
     width: 100%;
-    margin-top: 80px;
   }
 
   /* SINISTRA: TESTI */
@@ -49,9 +28,8 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center; /* CENTRATO IN ALTEZZA */
     align-items: center;
-    padding-top: 4vh;
     overflow: hidden;
   }
 
@@ -72,18 +50,33 @@
     margin-top: 5px;
   }
 
-  /* DESTRA: FOTO */
+  /* DESTRA: FOTO + MENU */
   #right {
     width: 50%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: center; /* CENTRATO IN ALTEZZA */
     align-items: center;
     overflow: hidden;
   }
 
+  /* MENU DESTRA */
+  #rightmenu {
+    margin-bottom: 20px;
+  }
+
+  #rightmenu a {
+    color: #0f0;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 2vw;
+    text-shadow: 0 0 10px #0f0;
+  }
+
+  /* FOTO */
   #right img {
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 90%;
+    max-height: 70%;
     object-fit: contain;
     border: 2px solid #0f0;
     box-shadow: 0 0 20px #0f0;
@@ -91,65 +84,47 @@
 
   /* SMARTPHONE */
   @media (max-width: 800px) {
+    html, body { overflow: auto; }
 
-    html, body {
-      overflow: auto;
-    }
+    #container { flex-direction: column; height: auto; }
 
-    #container {
-      flex-direction: column;
-      height: auto;
-    }
+    #left, #right { width: 100%; }
 
-    #left, #right {
-      width: 100%;
-    }
+    #clock { font-size: 12vw; }
+    #count1 { font-size: 7vw; }
+    #count2 { font-size: 6vw; }
 
-    #clock {
-      font-size: 12vw;
-    }
+    #rightmenu a { font-size: 6vw; margin: 0 10px; }
 
-    #count1 {
-      font-size: 7vw;
-    }
-
-    #count2 {
-      font-size: 6vw;
-    }
-
-    #right img {
-      max-height: 50vh;
-    }
-
-    #topmenu a {
-      font-size: 6vw;
-      margin: 0 15px;
-    }
+    #right img { max-height: 50vh; }
   }
 </style>
 </head>
 
 <body>
 
-<!-- MENU IN CIMA -->
-<div id="topmenu">
-  <a href="storia.html">Storia</a>
-  <a href="episodi.html">Episodi</a>
-  <a href="special.html">Special</a>
-</div>
-
 <div id="container">
 
-  <!-- SINISTRA: OROLOGIO + COUNTDOWN -->
+  <!-- SINISTRA -->
   <div id="left">
     <div id="clock">00:00:00</div>
     <div id="count1">🎄 Meno 000</div>
     <div id="count2">Giorni a Natale</div>
   </div>
 
-  <!-- DESTRA: FOTO AUTOMATICA -->
+  <!-- DESTRA -->
   <div id="right">
+
+    <!-- MENU DESTRA -->
+    <div id="rightmenu">
+      <a href="storia.html">Storia</a>
+      <a href="episodi.html">Episodi</a>
+      <a href="special.html">Special</a>
+    </div>
+
+    <!-- FOTO AUTOMATICA -->
     <img id="fotoPinguino" src="" alt="Pinguino del giorno">
+
   </div>
 
 </div>
