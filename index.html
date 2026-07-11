@@ -16,11 +16,32 @@
     overflow: hidden; /* niente scroll su PC */
   }
 
+  /* MENU IN CIMA */
+  #topmenu {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+
+  #topmenu a {
+    color: #0f0;
+    text-decoration: none;
+    margin: 0 30px;
+    font-size: 2vw;
+    text-shadow: 0 0 10px #0f0;
+  }
+
   /* CONTENITORE PRINCIPALE */
   #container {
     display: flex;
     height: 100%;
     width: 100%;
+    margin-top: 80px; /* spazio per il menu */
   }
 
   /* SINISTRA: PINGUINO */
@@ -97,11 +118,23 @@
     #left img {
       max-height: 50vh;
     }
+
+    #topmenu a {
+      font-size: 6vw;
+      margin: 0 15px;
+    }
   }
 </style>
 </head>
 
 <body>
+
+<!-- MENU IN CIMA -->
+<div id="topmenu">
+  <a href="storia.html">Storia</a>
+  <a href="episodi.html">Episodi</a>
+  <a href="special.html">Special</a>
+</div>
 
 <div id="container">
 
