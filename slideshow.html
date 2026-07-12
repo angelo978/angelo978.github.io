@@ -5,84 +5,63 @@
 <title>Slideshow Pinguino</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #000;
-    color: #0f0;
-    font-family: monospace;
-    overflow: hidden;
-  }
-  #container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-  #title {
-    margin-bottom: 20px;
-    font-size: 2vw;
-    text-shadow: 0 0 10px #0f0;
-  }
-  #fotoPinguino {
-    max-width: 90%;
-    max-height: 80%;
-    object-fit: contain;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 20px #0f0;
-  }
-  a {
-    color: #0f0;
-    margin-top: 20px;
-    text-decoration: none;
-    font-size: 1.5vw;
-    text-shadow: 0 0 10px #0f0;
-  }
+  html, body { margin: 0; padding: 0; height: 100%; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
+  #container { display: flex; flex-direction: column; height: 100%; width: 100%; justify-content: center; align-items: center; }
+  #title { margin-bottom: 20px; font-size: 2vw; text-shadow: 0 0 10px #0f0; }
+  #fotoPinguino { max-width: 90%; max-height: 70%; object-fit: contain; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
+  #status { margin-top: 15px; font-size: 2vw; text-shadow: 0 0 10px #0f0; min-height: 2vw; }
+  a { color: #0f0; margin-top: 20px; text-decoration: none; font-size: 1.5vw; text-shadow: 0 0 10px #0f0; }
 </style>
 </head>
 <body>
+
 <div id="container">
-  <div id="title">🎞 Slideshow Pinguino</div>
-  <img id="fotoPinguino" src="" alt="Slideshow Pinguino">
+  <div id="title">🎞 L'Odissea del Pinguino</div>
+  <img id="fotoPinguino" src="" alt="Slideshow">
+  <div id="status"></div>
   <a href="index.html">⬅ Torna alla Home</a>
 </div>
 
 <script>
 let index = 0;
-const maxFoto = 300;
 const delay = 7000;
 
-function mostraFoto(i) {
-  // Correzione: se i è 4, carica pinguino4s.png, altrimenti pinguino + i
-  const url = (i === 4) ? `foto/pinguino4s.png` : `foto/pinguino${i}.png`;
+function mostraFoto() {
+    let url = "";
 
-  const img = new Image();
-  img.src = url;
-
-  img.onload = () => {
-    document.getElementById("fotoPinguino").src = url;
-  };
-
-  img.onerror = () => {
-    console.log("Immagine non trovata: " + url);
-  };
-}
-
-function startSlideshow() {
-  mostraFoto(index);
-  setInterval(() => {
-    index++;
-    if (index > maxFoto) {
-      index = 0;
+    // Logica:
+    // 0-4 seguono la numerazione classica
+    // 4 diventa 4s
+    // >4 ricomincia a cercare pinguino5, pinguino6, ecc.
+    if (index === 4) {
+        url = "foto/pinguino4s.png";
+    } else if (index < 4) {
+        url = `foto/pinguino${index}.png`;
+    } else {
+        url = `foto/pinguino${index}.png`;
     }
-    mostraFoto(index);
-  }, delay);
+
+    const img = new Image();
+    img.onload = function() {
+        document.getElementById("fotoPinguino").src = url;
+        document.getElementById("fotoPinguino").style.display = "block";
+        document.getElementById("status").innerText = "";
+        index++;
+    };
+
+    img.onerror = function() {
+        // Se il file NON esiste, abbiamo finito le foto!
+        document.getElementById("fotoPinguino").style.display = "none";
+        document.getElementById("status").innerText = "FINE - RIPARTO DAL POLO...";
+        index = 0; // Reset
+    };
+
+    img.src = url;
 }
 
-startSlideshow();
+// Avvio
+mostraFoto();
+setInterval(mostraFoto, delay);
 </script>
 </body>
 </html>
