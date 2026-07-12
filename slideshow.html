@@ -1,102 +1,90 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Slideshow Pinguino</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #000;
-    color: #0f0;
-    font-family: monospace;
-    overflow: hidden;
-  }
-
-  #container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #title {
-    margin-bottom: 20px;
-    font-size: 2vw;
-    text-shadow: 0 0 10px #0f0;
-  }
-
-  #fotoPinguino {
-    max-width: 90%;
-    max-height: 80%;
-    object-fit: contain;
-    border: 2px solid #0f0;
-    box-shadow: 0 0 20px #0f0;
-  }
-
-  a {
-    color: #0f0;
-    margin-top: 20px;
-    text-decoration: none;
-    font-size: 1.5vw;
-    text-shadow: 0 0 10px #0f0;
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>Slideshow Pinguino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            overflow: hidden;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+        #title {
+            margin-bottom: 20px;
+            font-size: 2vw;
+            text-shadow: 0 0 10px #0f0;
+        }
+        #fotoPinguino {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            border: 2px solid #0f0;
+            box-shadow: 0 0 20px #0f0;
+        }
+        a {
+            color: #0f0;
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 1.5vw;
+            text-shadow: 0 0 10px #0f0;
+        }
+    </style>
 </head>
-
 <body>
+    <div id="container">
+        <div id="title">🎞 Slideshow Pinguino</div>
+        <img id="fotoPinguino" src="" alt="Slideshow Pinguino">
+        <a href="index.html">⬅ Torna alla Home</a>
+    </div>
 
-<div id="container">
-  <div id="title">🎞 Slideshow Pinguino</div>
-  <img id="fotoPinguino" src="" alt="Slideshow Pinguino">
-  <a href="index.html">⬅ Torna alla Home</a>
-</div>
+    <script>
+        let index = 0;
+        const maxFoto = 300;
+        const delay = 7000;
 
-<script>
-let index = 0;
-const maxFoto = 300;
-const delay = 7000;
+        function mostraFoto(i) {
+            // Nota l'uso dei backtick (`) qui sotto
+            const url = `foto/pinguino${i}.png`;
+            const urlAlt = `foto/pinguino${i}s.png`;
+            
+            const img = new Image();
+            img.src = url;
 
-function mostraFoto(i) {
-  const url = `foto/pinguino${i}.png`;
-  const urlAlt = `foto/pinguino${i}s.png`;
+            img.onload = () => {
+                document.getElementById("fotoPinguino").src = url;
+            };
 
-  const img = new Image();
-  img.src = url;
+            img.onerror = () => {
+                // Se pinguinoX.png non esiste, carica pinguinoXs.png
+                document.getElementById("fotoPinguino").src = urlAlt;
+            };
+        }
 
-  img.onload = () => {
-    document.getElementById("fotoPinguino").src = url;
-  };
+        function startSlideshow() {
+            mostraFoto(index);
+            setInterval(() => {
+                index++;
+                if (index > maxFoto) {
+                    index = 0;
+                }
+                mostraFoto(index);
+            }, delay);
+        }
 
-  img.onerror = () => {
-    const imgAlt = new Image();
-    imgAlt.src = urlAlt;
-
-    imgAlt.onload = () => {
-      document.getElementById("fotoPinguino").src = urlAlt;
-    };
-  };
-}
-
-function startSlideshow() {
-  mostraFoto(index);
-
-  setInterval(() => {
-    index++;
-    if (index > maxFoto) {
-      index = 0;
-    }
-    mostraFoto(index);
-  }, delay);
-}
-
-startSlideshow();
-</script>
-
+        startSlideshow();
+    </script>
 </body>
 </html>
