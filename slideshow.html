@@ -64,11 +64,22 @@ const delay = 7000;
 
 function mostraFoto(i) {
   const url = `foto/pinguino${i}.png`;
+  const urlAlt = `foto/pinguino${i}s.png`;
+
   const img = new Image();
   img.src = url;
 
   img.onload = () => {
     document.getElementById("fotoPinguino").src = url;
+  };
+
+  img.onerror = () => {
+    const imgAlt = new Image();
+    imgAlt.src = urlAlt;
+
+    imgAlt.onload = () => {
+      document.getElementById("fotoPinguino").src = urlAlt;
+    };
   };
 }
 
