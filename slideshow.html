@@ -38,7 +38,7 @@
 
 <script>
   let index = 0;
-  // Qui puoi aggiungere tutti i file che vuoi, nell'ordine che preferisci
+  // Assicurati che qui ci siano solo gli 8 file che hai effettivamente
   const listaFoto = [
     "foto/pinguino0.png",
     "foto/pinguino1.png",
@@ -47,27 +47,29 @@
     "foto/pinguino4s.png",
     "foto/pinguino5.png",
     "foto/pinguino6.png",
-    "foto/pinguino7.png",
-    "foto/pinguino8.png"
+    "foto/pinguino7.png"
   ];
 
   function mostraFoto() {
     const imgElement = document.getElementById("fotoPinguino");
+    const statusElement = document.getElementById("status");
+
     imgElement.src = listaFoto[index];
-    document.getElementById("status").innerText = `Foto ${index + 1} di ${listaFoto.length}`;
+    imgElement.style.display = "block";
+    // Ora segnerà 1 di 8, 2 di 8... fino a 8 di 8
+    statusElement.innerText = `Foto ${index + 1} di ${listaFoto.length}`;
   }
 
   function cambiaFoto(direzione) {
     index += direzione;
     
-    // Gestione loop: se supera la fine torna all'inizio, se va sotto 0 torna alla fine
+    // Con questo controllo, se sei all'ultima (7) e premi avanti, torni alla prima (0)
     if (index >= listaFoto.length) index = 0;
     if (index < 0) index = listaFoto.length - 1;
     
     mostraFoto();
   }
 
-  // Caricamento iniziale
   mostraFoto();
 </script>
 
