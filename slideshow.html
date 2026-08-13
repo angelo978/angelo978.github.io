@@ -1,83 +1,4 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-<meta charset="UTF-8">
-<title>Slideshow Pinguino</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  html, body { margin: 0; padding: 0; height: 100%; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
-  #container { display: flex; flex-direction: column; height: 100%; width: 100%; justify-content: center; align-items: center; }
-  #title { margin-bottom: 20px; font-size: 2vw; text-shadow: 0 0 10px #0f0; }
-  
-  /* Area immagine e controlli */
-  .display-area { display: flex; align-items: center; gap: 20px; height: 70%; }
-  #fotoPinguino { max-width: 70vw; max-height: 100%; object-fit: contain; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
-  
-  /* Bottoni */
-  button { background: transparent; color: #0f0; border: 2px solid #0f0; padding: 10px 20px; font-size: 2vw; cursor: pointer; text-shadow: 0 0 10px #0f0; }
-  button:hover { background: #0f0; color: #000; }
-
-  #status { margin-top: 15px; font-size: 2vw; text-shadow: 0 0 10px #0f0; min-height: 2vw; }
-  a { color: #0f0; margin-top: 20px; text-decoration: none; font-size: 1.5vw; text-shadow: 0 0 10px #0f0; }
-</style>
-</head>
-<body>
-
-<div id="container">
-  <div id="title">🎞 Viaggio del Pinguino</div>
-  
-  <div class="display-area">
-    <button onclick="cambiaFoto(-1)">⬅</button>
-    <img id="fotoPinguino" src="" alt="FINE">
-    <button onclick="cambiaFoto(1)">➡</button>
-  </div>
-
-  <div id="status"></div>
-  <a href="index.html">⬅ Torna alla Home</a>
-</div>
-
-<script>
-  let index = 0;
-  
-  // Lista di tutte le scene (incluse le speciali)
-  const listaFoto = [
-    "foto/pinguino0.png",
-    "foto/pinguino1.png",
-    "foto/pinguino2.png",
-    "foto/pinguino3.png",
-    "foto/pinguino4s.png",
-    "foto/pinguino5.png",
-    "foto/pinguino6.png",
-    "foto/pinguino7.png",
-    "foto/pinguino8.png",
-    "foto/pinguino9.png",
-    "foto/pinguino10.png",
-    "foto/pinguino11.png",
-    "foto/pinguino12.png",
-    "foto/pinguino13.png",
-    "foto/pinguino14.png",
-    "foto/pinguino15.png",
-    "foto/pinguino16.png",
-    "foto/pinguino17.png",
-    "foto/pinguino18.png",
-    "foto/pinguino19.png",
-    "foto/pinguino20.png",
-    "foto/pinguino21.png",
-    "foto/pinguino22.png",
-    "foto/pinguino23.png",
-    "foto/pinguino24.png",
-    "foto/pinguino24a.png",
-    "foto/pinguino25.png",
-    "foto/pinguino26.png",
-    "foto/pinguino27.png",
-    "foto/pinguino28.png",
-    "foto/pinguino29.png",
-    "foto/pinguino30.png",
-    "foto/pinguino31.png",
-    "foto/pinguino32.png"
-  ];
-
-  // Elenco dei file considerati "speciali" da escludere dal conteggio numerico standard
+// Elenco dei file considerati "speciali" da escludere dal conteggio numerico standard
   const fileSpeciali = [
     "foto/pinguino0.png",
     "foto/pinguino4s.png",
@@ -96,38 +17,17 @@
     if (fileSpeciali.includes(currentFile)) {
       statusElement.innerText = `⭐ Scena Speciale`;
     } else {
-      // Calcoliamo quanti file speciali ci sono prima di questo indice per scalarli dal conteggio
-      let specialiPrecedenti = 0;
+      // Contiamo quanti elementi normali ci sono in totale nell'array (escludendo gli speciali)
+      const totaleNormali = listaFoto.length - fileSpeciali.length; // 35 - 3 = 32 giusti!
+
+      // Calcoliamo il numero progressivo esatto della foto normale corrente
+      let numeroCorrente = 0;
       for (let i = 0; i <= index; i++) {
-        if (fileSpeciali.includes(listaFoto[i])) {
-          specialiPrecedenti++;
+        if (!fileSpeciali.includes(listaFoto[i])) {
+          numeroCorrente++;
         }
       }
-      
-      // Il totale delle scene normali è la lunghezza totale meno i 3 speciali
-      const totaleNormali = listaFoto.length - fileSpeciali.length;
-      const numeroCorrente = index + 1 - specialiPrecedenti;
 
       statusElement.innerText = `Foto ${numeroCorrente} di ${totaleNormali}`;
     }
   }
-
-  function cambiaFoto(direzione) {
-    index += direzione;
-    
-    if (index >= listaFoto.length) {
-      index = 0;
-    }
-    if (index < 0) {
-      index = listaFoto.length - 1;
-    }
-    
-    mostraFoto();
-  }
-
-  // Avvio iniziale
-  mostraFoto();
-</script>
-
-</body>
-</html>
