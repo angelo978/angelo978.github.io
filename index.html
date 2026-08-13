@@ -78,16 +78,17 @@
     object-fit: contain;
     border: 2px solid #0f0;
     box-shadow: 0 0 20px #0f0;
+    transition: opacity 0.5s ease-in-out;
   }
 
-  /* MAGIA PER SMARTPHONE IN VERTICALE: SCRITTE SOPRA, FOTO SOTTO */
+  /* SMARTPHONE IN VERTICALE: SCRITTE SOPRA, FOTO SOTTO */
   @media (max-width: 768px) and (orientation: portrait) {
     body {
-      overflow: auto; /* Permette lo scorrimento se lo schermo è piccolo */
+      overflow: auto;
     }
 
     #container {
-      flex-direction: column; /* Dispone gli elementi uno sotto l'altro */
+      flex-direction: column;
       height: auto;
       min-height: 100%;
     }
@@ -104,7 +105,6 @@
       box-sizing: border-box;
     }
 
-    /* Adattamento dimensioni caratteri per il telefono in verticale */
     #leftmenu a {
       font-size: 4.5vw;
       margin: 0 8px;
@@ -134,7 +134,7 @@
 
 <div id="container">
 
-  <!-- SINISTRA (Diventa la parte SOPRA in verticale) -->
+  <!-- SINISTRA (Parte SOPRA in verticale) -->
   <div id="left">
 
     <div id="leftmenu">
@@ -149,7 +149,7 @@
     <div id="count2">Giorni a Natale</div>
   </div>
 
-  <!-- DESTRA (Diventa la parte SOTTO in verticale) -->
+  <!-- DESTRA (Parte SOTTO in verticale) -->
   <div id="right">
     <img id="fotoPinguino" src="" alt="Pinguino del giorno">
   </div>
@@ -176,22 +176,40 @@ function updateCountdown() {
   document.getElementById("count2").textContent = `Giorni a Natale`;
 }
 
-/* FOTO DEL GIORNO */
-function caricaUltimaFoto() {
-  let max = 0;
+/* GESTIONE FOTO CALENDARIZZATA (Gennaio -> Foto 0 | Agosto -> Foto 16 | Natale -> Foto 32) */
+function calcolaFotoDelPeriodo() {
+  const now = new Date();
+  const mese = now.getMonth(); // 0 = Gennaio, 7 = Agosto, 11 = Dicembre
+  const giorno = now.getDate();
 
-  for (let i = 0; i <= 300; i++) {
-    const url = `foto/pinguino${i}.png`;
-    const img = new Image();
-    img.src = url;
+  let fotoSelezionata = 0;
 
-    img.onload = () => {
-      if (i > max) {
-        max = i;
-        document.getElementById("fotoPinguino").src = url;
-      }
-    };
+  // Se siamo a dicembre vicino a Natale (dal 20 in poi), puntiamo dritti alla 32
+  if (mese === 11 && giorno >= 20) {
+    fotoSelezionata = 32;
+  } else {
+    // Mappatura lineare dei mesi dell'anno (da Gennaio a Dicembre) sulle 32 scene
+    // Gennaio (0) -> circa foto 0-2
+    // Agosto (7) -> circa foto 16
+    // Dicembre prima del 20 -> foto vicine alla 31
+    const giornoDellAnno = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+    // Dividiamo i giorni dell'anno (365) in 32 step per far avanzare la foto pian piano
+    let step = Math.floor(giornoDellAnno / (365 / 32));
+    fotoSelezionata = Math.min(Math.max(step, 0), 31); // Massimo 31 prima del blocco di Natale
   }
+
+  const url = `foto/pinguino${fotoSelezionata}.png`;
+  
+  // Verifica se l'immagine esiste, altrimenti scala sulla prima disponibile
+  const imgTest = new Image();
+  imgTest.src = url;
+  imgTest.onload = () => {
+    document.getElementById("fotoPinguino").src = url;
+  };
+  imgTest.onerror = () => {
+    // Fallback sulla foto 0 se quella calcolata non è ancora caricata nella cartella
+    document.getElementById("fotoPinguino").src = `foto/pinguino0.png`;
+  };
 }
 
 setInterval(updateClock, 1000);
@@ -199,7 +217,8 @@ updateClock();
 updateCountdown();
 setInterval(updateCountdown, 1000 * 60 * 60);
 
-caricaUltimaFoto();
+// Carica la foto giusta in base al periodo dell'anno
+calcolaFotoDelPeriodo();
 </script>
 
 </body>
