@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>La Storia del Pinguino di Natale - Avventura Natalizia</title>
 <meta name="description" content="Segui l'avventura del pinguino brontolone che deve recuperare la soletta magica per salvare il Natale. Una storia divertente con 35 scene animate.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
   html, body {
@@ -16,10 +17,30 @@
     overflow: hidden;
   }
 
+  /* GRECHINA NATALIZIA */
+  .grechina {
+    text-align: center;
+    font-size: 1.5vw;
+    letter-spacing: 5px;
+    padding: 5px 0;
+    text-shadow: 0 0 10px #0f0;
+    background: #000;
+    width: 100%;
+    z-index: 10;
+  }
+
+  #main-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+
   #container {
     display: flex;
-    height: 100%;
+    flex: 1;
     width: 100%;
+    overflow: hidden;
   }
 
   /* SINISTRA */
@@ -34,7 +55,7 @@
 
   /* MENU SINISTRA */
   #leftmenu {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     text-align: center;
   }
 
@@ -83,14 +104,18 @@
 
   /* MAGIA PER SMARTPHONE IN VERTICALE: SCRITTE SOPRA, FOTO SOTTO */
   @media (max-width: 768px) and (orientation: portrait) {
-    body {
+    html, body {
       overflow: auto;
+      height: auto;
+    }
+
+    #main-wrapper {
+      height: auto;
     }
 
     #container {
       flex-direction: column;
       height: auto;
-      min-height: 100%;
     }
 
     #left {
@@ -101,8 +126,12 @@
 
     #right {
       width: 100%;
-      padding: 20px 10px 40px 10px;
+      padding: 20px 10px 30px 10px;
       box-sizing: border-box;
+    }
+
+    .grechina {
+      font-size: 4vw;
     }
 
     #leftmenu a {
@@ -124,7 +153,7 @@
 
     #right img {
       max-width: 85%;
-      max-height: 70vh;
+      max-height: 65vh;
     }
   }
 </style>
@@ -132,28 +161,33 @@
 
 <body>
 
-<div id="container">
+<div id="main-wrapper">
+  <!-- GRECHINA INIZIO -->
+  <div class="grechina">🎄 🎁 🎄 🎁 🎄 🎁 🎄 🎁 🎄 🎁 🎄 🎁 🎄</div>
 
-  <!-- SINISTRA (Parte SOPRA in verticale) -->
-  <div id="left">
+  <div id="container">
+    <!-- SINISTRA (Parte SOPRA in verticale) -->
+    <div id="left">
+      <div id="leftmenu">
+        <a href="storia.html">Storia</a>
+        <a href="episodi.html">Episodi</a>
+        <a href="special.html">Special</a>
+        <a href="slideshow.html">Slideshow</a>
+      </div>
 
-    <div id="leftmenu">
-      <a href="storia.html">Storia</a>
-      <a href="episodi.html">Episodi</a>
-      <a href="special.html">Special</a>
-      <a href="slideshow.html">Slideshow</a>
+      <div id="clock">00:00:00</div>
+      <div id="count1">🎄 Meno 000</div>
+      <div id="count2">Giorni a Natale</div>
     </div>
 
-    <div id="clock">00:00:00</div>
-    <div id="count1">🎄 Meno 000</div>
-    <div id="count2">Giorni a Natale</div>
+    <!-- DESTRA (Parte SOTTO in verticale) -->
+    <div id="right">
+      <img id="fotoPinguino" src="" alt="Pinguino del mese">
+    </div>
   </div>
 
-  <!-- DESTRA (Parte SOTTO in verticale) -->
-  <div id="right">
-    <img id="fotoPinguino" src="" alt="Pinguino del mese">
-  </div>
-
+  <!-- GRECHINA FINE -->
+  <div class="grechina">🎄 🎁 🎄 🎁 🎄 🎁 🎄 🎁 🎄 🎁 🎄 🎁 🎄</div>
 </div>
 
 <script>
@@ -179,17 +213,14 @@ function updateCountdown() {
 /* FOTO ASSOCIATA AL MESE / PERIODO */
 function caricaFotoDelMese() {
   const now = new Date();
-  const mese = now.getMonth(); // 0 = Gennaio, 7 = Agosto, 11 = Dicembre
+  const mese = now.getMonth(); 
   const giorno = now.getDate();
 
   let numeroFoto = 0;
 
   if (mese === 11 && giorno >= 24) {
-    // Giorno di Natale / Vigilia: Foto 32 fissa
     numeroFoto = 32;
   } else {
-    // Mappa i 12 mesi dell'anno (da Gennaio a Dicembre) distribuendoli sulle 32 foto
-    // Gennaio (0) -> 0, Agosto (7) -> 16, Dicembre -> 31, ecc.
     numeroFoto = Math.floor((mese / 11) * 31); 
   }
 
