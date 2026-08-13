@@ -39,7 +39,7 @@
 <script>
   let index = 0;
   
-  // Lista completa di tutte le scene
+  // Lista di tutte le scene (incluse le speciali)
   const listaFoto = [
     "foto/pinguino0.png",
     "foto/pinguino1.png",
@@ -77,24 +77,47 @@
     "foto/pinguino32.png"
   ];
 
+  // Elenco dei file considerati "speciali" da escludere dal conteggio numerico standard
+  const fileSpeciali = [
+    "foto/pinguino0.png",
+    "foto/pinguino4s.png",
+    "foto/pinguino24a.png"
+  ];
+
   function mostraFoto() {
     const imgElement = document.getElementById("fotoPinguino");
     const statusElement = document.getElementById("status");
+    const currentFile = listaFoto[index];
 
-    imgElement.src = listaFoto[index];
+    imgElement.src = currentFile;
     imgElement.style.display = "block";
-    // Mostra dinamicamente la posizione corretta basata sulla lunghezza reale dell'array
-    statusElement.innerText = `Foto ${index + 1} di ${listaFoto.length}`;
+
+    // Controlliamo se la foto attuale è una di quelle speciali
+    if (fileSpeciali.includes(currentFile)) {
+      statusElement.innerText = `⭐ Scena Speciale`;
+    } else {
+      // Calcoliamo quanti file speciali ci sono prima di questo indice per scalarli dal conteggio
+      let specialiPrecedenti = 0;
+      for (let i = 0; i <= index; i++) {
+        if (fileSpeciali.includes(listaFoto[i])) {
+          specialiPrecedenti++;
+        }
+      }
+      
+      // Il totale delle scene normali è la lunghezza totale meno i 3 speciali
+      const totaleNormali = listaFoto.length - fileSpeciali.length;
+      const numeroCorrente = index + 1 - specialiPrecedenti;
+
+      statusElement.innerText = `Foto ${numeroCorrente} di ${totaleNormali}`;
+    }
   }
 
   function cambiaFoto(direzione) {
     index += direzione;
     
-    // Se supera l'ultima foto, torna alla prima (0)
     if (index >= listaFoto.length) {
       index = 0;
     }
-    // Se va prima della prima foto, passa all'ultima
     if (index < 0) {
       index = listaFoto.length - 1;
     }
@@ -102,7 +125,7 @@
     mostraFoto();
   }
 
-  // Avvio iniziale della slideshow
+  // Avvio iniziale
   mostraFoto();
 </script>
 
