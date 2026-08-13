@@ -17,46 +17,31 @@
 
   #container { 
     display: flex; 
-    flex-direction: column; 
     height: 100%; 
     width: 100%; 
-    justify-content: center; 
-    align-items: center; 
-    box-sizing: border-box;
-    padding: 10px;
+  }
+
+  /* SINISTRA: TESTI E COMANDI */
+  #left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
 
   #title { 
-    margin-bottom: 15px; 
+    margin-bottom: 25px; 
     font-size: 2vw; 
     text-shadow: 0 0 10px #0f0; 
     text-align: center;
   }
-  
-  /* Area immagine */
-  .display-area { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    height: 65vh; 
-    width: 100%;
-    position: relative;
-  }
 
-  #fotoPinguino { 
-    max-width: 80vw; 
-    max-height: 100%; 
-    object-fit: contain; 
-    border: 2px solid #0f0; 
-    box-shadow: 0 0 20px #0f0; 
-    cursor: pointer;
-  }
-  
-  /* Controlli touch / testuali puliti sotto */
   .nav-bar {
     display: flex;
     gap: 30px;
-    margin-top: 15px;
+    margin-top: 25px;
   }
 
   .nav-btn { 
@@ -75,7 +60,7 @@
   }
 
   #status { 
-    margin-top: 10px; 
+    margin-top: 20px; 
     font-size: 1.8vw; 
     text-shadow: 0 0 10px #0f0; 
     min-height: 2vw; 
@@ -84,7 +69,7 @@
 
   .home-link { 
     color: #0f0; 
-    margin-top: 15px; 
+    margin-top: 25px; 
     text-decoration: none; 
     font-size: 1.5vw; 
     text-shadow: 0 0 10px #0f0; 
@@ -94,35 +79,62 @@
     text-decoration: underline;
   }
 
-  /* OTTIMIZZAZIONE PER SMARTPHONE IN VERTICALE */
-  @media (max-width: 768px) {
+  /* DESTRA: FOTO GRANDE */
+  #right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  #fotoPinguino { 
+    max-width: 90%; 
+    max-height: 90%; 
+    object-fit: contain; 
+    border: 2px solid #0f0; 
+    box-shadow: 0 0 20px #0f0; 
+    cursor: pointer;
+  }
+
+  /* OTTIMIZZAZIONE PER SMARTPHONE IN VERTICALE (torna a sopra/sotto) */
+  @media (max-width: 768px) and (orientation: portrait) {
     body {
       overflow: auto;
     }
     #container {
+      flex-direction: column;
       height: auto;
       min-height: 100%;
-      padding: 20px 10px;
+    }
+    #left {
+      width: 100%;
+      padding: 30px 10px;
+      box-sizing: border-box;
+    }
+    #right {
+      width: 100%;
+      padding: 10px 10px 40px 10px;
+      box-sizing: border-box;
     }
     #title {
       font-size: 5vw;
-    }
-    .display-area {
-      height: auto;
-    }
-    #fotoPinguino {
-      max-width: 90vw;
-      max-height: 55vh;
+      margin-bottom: 15px;
     }
     .nav-btn {
-      font-size: 5vw;
+      font-size: 4.5vw;
     }
     #status {
       font-size: 4.5vw;
+      margin-top: 15px;
     }
     .home-link {
       font-size: 4.5vw;
-      margin-top: 25px;
+      margin-top: 20px;
+    }
+    #fotoPinguino {
+      max-width: 90vw;
+      max-height: 60vh;
     }
   }
 </style>
@@ -130,20 +142,26 @@
 <body>
 
 <div id="container">
-  <div id="title">🎞 Viaggio del Pinguino</div>
-  
-  <div class="display-area">
+
+  <!-- SINISTRA: Titolo, Frecce, Stato e Home -->
+  <div id="left">
+    <div id="title">🎞 Viaggio del Pinguino</div>
+    
+    <div class="nav-bar">
+      <button class="nav-btn" onclick="cambiaFoto(-1)">&larr; Indietro</button>
+      <button class="nav-btn" onclick="cambiaFoto(1)">Avanti &rarr;</button>
+    </div>
+
+    <div id="status"></div>
+    <a class="home-link" href="index.html">&larr; Torna alla Home</a>
+  </div>
+
+  <!-- DESTRA: Foto grande -->
+  <div id="right">
     <!-- Cliccando direttamente sull'immagine si va avanti -->
     <img id="fotoPinguino" src="" alt="FINE" onclick="cambiaFoto(1)" title="Clicca per la foto successiva">
   </div>
 
-  <div class="nav-bar">
-    <button class="nav-btn" onclick="cambiaFoto(-1)">&larr; Indietro</button>
-    <button class="nav-btn" onclick="cambiaFoto(1)">Avanti &rarr;</button>
-  </div>
-
-  <div id="status"></div>
-  <a class="home-link" href="index.html">&larr; Torna alla Home</a>
 </div>
 
 <script>
