@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Slideshow Pinguino</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   html, body { 
     margin: 0; 
@@ -20,69 +20,74 @@
     flex-direction: column; 
     height: 100%; 
     width: 100%; 
-    justify-content: space-between; 
+    justify-content: center; 
     align-items: center; 
     box-sizing: border-box;
-    padding: 1vh 10px;
+    padding: 10px;
   }
 
   #title { 
+    margin-bottom: 15px; 
     font-size: 2vw; 
     text-shadow: 0 0 10px #0f0; 
     text-align: center;
-    margin-top: 1vh;
   }
   
-  /* Area immagine centrale con frecce laterali */
+  /* Area immagine */
   .display-area { 
     display: flex; 
     align-items: center; 
     justify-content: center;
-    height: 62vh; 
+    height: 65vh; 
     width: 100%;
     position: relative;
-    gap: 15px;
   }
 
   #fotoPinguino { 
-    max-width: 75vw; 
+    max-width: 80vw; 
     max-height: 100%; 
     object-fit: contain; 
     border: 2px solid #0f0; 
     box-shadow: 0 0 20px #0f0; 
     cursor: pointer;
   }
-
-  /* Frecce triangolari ai fianchi */
-  .side-btn {
-    background: none;
-    border: none;
-    color: #0f0;
-    font-size: 4vw;
-    cursor: pointer;
-    text-shadow: 0 0 15px #0f0;
-    font-family: monospace;
-    padding: 10px;
-    user-select: none;
-    transition: transform 0.1s;
+  
+  /* Controlli touch / testuali puliti sotto */
+  .nav-bar {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
   }
 
-  .side-btn:active {
-    transform: scale(0.9);
+  .nav-btn { 
+    color: #0f0; 
+    background: none;
+    border: none;
+    font-size: 1.8vw; 
+    cursor: pointer; 
+    text-shadow: 0 0 10px #0f0; 
+    font-family: monospace;
+    font-weight: bold;
+  }
+  
+  .nav-btn:hover { 
+    text-decoration: underline;
   }
 
   #status { 
+    margin-top: 10px; 
     font-size: 1.8vw; 
     text-shadow: 0 0 10px #0f0; 
+    min-height: 2vw; 
     text-align: center;
   }
 
   .home-link { 
     color: #0f0; 
+    margin-top: 15px; 
     text-decoration: none; 
     font-size: 1.5vw; 
     text-shadow: 0 0 10px #0f0; 
-    margin-bottom: 1vh;
   }
   
   .home-link:hover {
@@ -90,39 +95,34 @@
   }
 
   /* OTTIMIZZAZIONE PER SMARTPHONE IN VERTICALE */
-  @media (max-width: 768px) and (orientation: portrait) {
-    html, body {
-      overflow: hidden;
-      height: 100vh;
+  @media (max-width: 768px) {
+    body {
+      overflow: auto;
     }
     #container {
-      height: 100vh;
-      padding: 1vh 5px;
+      height: auto;
+      min-height: 100%;
+      padding: 20px 10px;
     }
     #title {
-      font-size: 4.5vw;
-      margin-top: 0.5vh;
+      font-size: 5vw;
     }
     .display-area {
-      height: 68vh;
-      gap: 10px;
+      height: auto;
     }
     #fotoPinguino {
-      max-width: 70vw;
-      max-height: 100%;
-      border: 2px solid #0f0 !important;
-      box-shadow: 0 0 15px #0f0 !important;
+      max-width: 90vw;
+      max-height: 55vh;
     }
-    .side-btn {
-      font-size: 8vw;
-      padding: 5px;
+    .nav-btn {
+      font-size: 5vw;
     }
     #status {
-      font-size: 3.8vw;
+      font-size: 4.5vw;
     }
     .home-link {
-      font-size: 3.8vw;
-      margin-bottom: 1vh;
+      font-size: 4.5vw;
+      margin-top: 25px;
     }
   }
 </style>
@@ -133,10 +133,13 @@
   <div id="title">🎞 Viaggio del Pinguino</div>
   
   <div class="display-area">
-    <button class="side-btn" onclick="cambiaFoto(-1)">◀</button>
     <!-- Cliccando direttamente sull'immagine si va avanti -->
     <img id="fotoPinguino" src="" alt="FINE" onclick="cambiaFoto(1)" title="Clicca per la foto successiva">
-    <button class="side-btn" onclick="cambiaFoto(1)">▶</button>
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="cambiaFoto(-1)">&larr; Indietro</button>
+    <button class="nav-btn" onclick="cambiaFoto(1)">Avanti &rarr;</button>
   </div>
 
   <div id="status"></div>
