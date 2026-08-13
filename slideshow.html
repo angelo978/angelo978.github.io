@@ -5,20 +5,119 @@
 <title>Slideshow Pinguino</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  html, body { margin: 0; padding: 0; height: 100%; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
-  #container { display: flex; flex-direction: column; height: 100%; width: 100%; justify-content: center; align-items: center; }
-  #title { margin-bottom: 20px; font-size: 2vw; text-shadow: 0 0 10px #0f0; }
+  html, body { 
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+    background: #000; 
+    color: #0f0; 
+    font-family: monospace; 
+    overflow: hidden; 
+  }
+
+  #container { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    width: 100%; 
+    justify-content: center; 
+    align-items: center; 
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  #title { 
+    margin-bottom: 15px; 
+    font-size: 2.2vw; 
+    text-shadow: 0 0 10px #0f0; 
+    text-align: center;
+  }
   
   /* Area immagine e controlli */
-  .display-area { display: flex; align-items: center; gap: 20px; height: 70%; }
-  #fotoPinguino { max-width: 70vw; max-height: 100%; object-fit: contain; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
+  .display-area { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 15px; 
+    height: 65vh; 
+    width: 100%;
+  }
+
+  #fotoPinguino { 
+    max-width: 65vw; 
+    max-height: 100%; 
+    object-fit: contain; 
+    border: 2px solid #0f0; 
+    box-shadow: 0 0 20px #0f0; 
+  }
   
   /* Bottoni */
-  button { background: transparent; color: #0f0; border: 2px solid #0f0; padding: 10px 20px; font-size: 2vw; cursor: pointer; text-shadow: 0 0 10px #0f0; }
-  button:hover { background: #0f0; color: #000; }
+  button { 
+    background: transparent; 
+    color: #0f0; 
+    border: 2px solid #0f0; 
+    padding: 15px 20px; 
+    font-size: 2vw; 
+    cursor: pointer; 
+    text-shadow: 0 0 10px #0f0; 
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  button:hover { 
+    background: #0f0; 
+    color: #000; 
+  }
 
-  #status { margin-top: 15px; font-size: 2vw; text-shadow: 0 0 10px #0f0; min-height: 2vw; }
-  a { color: #0f0; margin-top: 20px; text-decoration: none; font-size: 1.5vw; text-shadow: 0 0 10px #0f0; }
+  #status { 
+    margin-top: 15px; 
+    font-size: 1.8vw; 
+    text-shadow: 0 0 10px #0f0; 
+    min-height: 2vw; 
+    text-align: center;
+  }
+
+  a { 
+    color: #0f0; 
+    margin-top: 15px; 
+    text-decoration: none; 
+    font-size: 1.5vw; 
+    text-shadow: 0 0 10px #0f0; 
+  }
+
+  /* OTTIMIZZAZIONE PER SMARTPHONE IN VERTICALE */
+  @media (max-width: 768px) {
+    body {
+      overflow: auto;
+    }
+    #container {
+      height: auto;
+      min-height: 100%;
+      padding: 20px 10px;
+    }
+    #title {
+      font-size: 5vw;
+    }
+    .display-area {
+      height: auto;
+      gap: 10px;
+    }
+    #fotoPinguino {
+      max-width: 75vw;
+      max-height: 55vh;
+    }
+    button {
+      font-size: 6vw;
+      padding: 12px 18px;
+    }
+    #status {
+      font-size: 4.5vw;
+    }
+    a {
+      font-size: 4vw;
+      margin-top: 25px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -27,9 +126,9 @@
   <div id="title">🎞 Viaggio del Pinguino</div>
   
   <div class="display-area">
-    <button onclick="cambiaFoto(-1)">⬅</button>
+    <button onclick="cambiaFoto(-1)">&lt;</button>
     <img id="fotoPinguino" src="" alt="FINE">
-    <button onclick="cambiaFoto(1)">➡</button>
+    <button onclick="cambiaFoto(1)">&gt;</button>
   </div>
 
   <div id="status"></div>
@@ -97,7 +196,7 @@
     if (fileSpeciali.includes(currentFile)) {
       statusElement.innerText = `⭐ Scena Speciale`;
     } else {
-      // Totale delle scene normali (35 totali - 3 speciali = 32 giuste)
+      // Totale delle scene normali
       const totaleNormali = listaFoto.length - fileSpeciali.length;
 
       // Calcoliamo il numero progressivo esatto della foto normale corrente
