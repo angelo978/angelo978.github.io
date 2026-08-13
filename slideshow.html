@@ -21,7 +21,7 @@
     width: 100%; 
   }
 
-  /* SINISTRA: TESTI E COMANDI */
+  /* SINISTRA: TESTI E COMANDI (PC) */
   #left {
     width: 50%;
     display: flex;
@@ -79,7 +79,7 @@
     text-decoration: underline;
   }
 
-  /* DESTRA: FOTO GRANDE */
+  /* DESTRA: FOTO GRANDE (PC) */
   #right {
     width: 50%;
     display: flex;
@@ -97,7 +97,7 @@
     cursor: pointer;
   }
 
-  /* MAGIA PER SMARTPHONE IN VERTICALE: SCritte compatte e foto che ci sta perfettamente senza scroll */
+  /* OTTIMIZZAZIONE SMARTPHONE VERTICALE: 100% SENZA SPAZI VUOTI */
   @media (max-width: 768px) and (orientation: portrait) {
     html, body {
       overflow: hidden;
@@ -109,40 +109,40 @@
     }
     #left {
       width: 100%;
-      height: 26vh;
-      padding: 0.5vh 2vw;
+      height: 19vh;
+      padding: 2px 5px;
       box-sizing: border-box;
-      justify-content: space-evenly;
+      justify-content: space-between;
     }
     #right {
       width: 100%;
-      height: 74vh;
-      padding: 0.5vh 2vw 2vh 2vw;
+      height: 81vh;
+      padding: 0 5px 2px 5px;
       box-sizing: border-box;
     }
     #title {
-      font-size: 4.5vw;
-      margin-bottom: 0;
+      font-size: 4vw;
+      margin: 0;
     }
     .nav-bar {
-      margin-top: 0;
-      gap: 25px;
+      margin: 0;
+      gap: 20px;
     }
     .nav-btn {
-      font-size: 4.2vw;
+      font-size: 4vw;
     }
     #status {
-      font-size: 3.8vw;
-      margin-top: 0;
+      font-size: 3.5vw;
+      margin: 0;
       min-height: auto;
     }
     .home-link {
-      font-size: 3.8vw;
-      margin-top: 0;
+      font-size: 3.5vw;
+      margin: 0;
     }
     #fotoPinguino {
-      max-width: 90%;
-      max-height: 62vh;
+      max-width: 95vw;
+      max-height: 100%;
       border: 2px solid #0f0 !important;
       box-shadow: 0 0 15px #0f0 !important;
     }
