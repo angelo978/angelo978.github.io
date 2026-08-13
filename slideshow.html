@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Slideshow Pinguino</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <style>
   html, body { 
     margin: 0; 
@@ -12,6 +12,7 @@
     background: #000; 
     color: #0f0; 
     font-family: monospace; 
+    overflow: hidden; 
   }
 
   #container { 
@@ -27,6 +28,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 
   #title { 
@@ -83,6 +85,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 
   #fotoPinguino { 
@@ -94,55 +97,60 @@
     cursor: pointer;
   }
 
-  /* OTTIMIZZAZIONE SMARTPHONE VERTICALE: Colonna unica con scroll fluido */
+  /* OTTIMIZZAZIONE SMARTPHONE VERTICALE: Gestione altezze rigide e compatte per evitare sbordamenti */
   @media (max-width: 768px) and (orientation: portrait) {
     html, body {
-      height: auto;
-      overflow-y: auto;
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
     }
     #container {
       flex-direction: column;
-      height: auto;
-      min-height: 100vh;
-      padding: 20px 10px;
+      height: 100vh;
+      height: 100dvh;
       box-sizing: border-box;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 20px;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
     #left {
       width: 100%;
-      height: auto;
+      height: 21vh;
+      padding: 2px 5px;
+      box-sizing: border-box;
+      justify-content: space-around;
+      flex-shrink: 0;
     }
     #right {
       width: 100%;
-      height: auto;
+      height: 75vh;
+      padding: 0 5px 1vh 5px;
+      box-sizing: border-box;
+      flex-shrink: 0;
     }
     #title {
-      font-size: 6vw;
-      margin-bottom: 15px;
+      font-size: 4.2vw;
+      margin: 0;
     }
     .nav-bar {
-      margin-top: 15px;
-      gap: 40px;
+      margin: 0;
+      gap: 25px;
     }
     .nav-btn {
-      font-size: 5vw;
+      font-size: 4.2vw;
     }
     #status {
-      font-size: 4.5vw;
-      margin-top: 15px;
+      font-size: 3.8vw;
+      margin: 0;
+      min-height: auto;
     }
     .home-link {
-      font-size: 4.5vw;
-      margin-top: 15px;
+      font-size: 3.8vw;
+      margin: 0;
     }
     #fotoPinguino {
       max-width: 92vw;
-      max-height: none;
-      width: 100%;
+      max-height: 100%;
       border: 2px solid #0f0 !important;
-      box-shadow: 0 0 15px #0f0 !important;
+      box-shadow: 0 0 12px #0f0 !important;
     }
   }
 </style>
