@@ -53,15 +53,10 @@
     margin-bottom: 2vh;
   }
 
-  #count1 {
-    font-size: 2.5vw;
-    text-shadow: 0 0 10px #0f0;
-  }
-
-  #count2 {
+  #countdown {
     font-size: 2vw;
     text-shadow: 0 0 10px #0f0;
-    margin-top: 0.5vh;
+    white-space: nowrap;
   }
 
   /* DESTRA */
@@ -97,7 +92,7 @@
     #left {
       width: 100%;
       height: 35vh;
-      padding: 1vh 5vw;
+      padding: 1vh 2vw;
       box-sizing: border-box;
       justify-content: space-evenly;
     }
@@ -114,8 +109,8 @@
     }
 
     #leftmenu a {
-      font-size: 4vw;
-      margin: 0 6px;
+      font-size: 3.8vw;
+      margin: 0 5px;
     }
 
     #clock {
@@ -123,12 +118,9 @@
       margin-bottom: 0;
     }
 
-    #count1 {
-      font-size: 5vw;
-    }
-
-    #count2 {
-      font-size: 4vw;
+    #countdown {
+      font-size: 3.6vw;
+      white-space: nowrap;
     }
 
     #right img {
@@ -153,8 +145,7 @@
     </div>
 
     <div id="clock">00:00:00</div>
-    <div id="count1">🎄 Meno 000</div>
-    <div id="count2">Giorni a Natale</div>
+    <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
   </div>
 
   <!-- DESTRA (Parte SOTTO in verticale) -->
@@ -180,11 +171,10 @@ function updateCountdown() {
   const christmas = new Date(today.getFullYear(), 11, 25);
   const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
 
-  document.getElementById("count1").textContent = `🎄 Meno ${diff}`;
-  document.getElementById("count2").textContent = `Giorni a Natale`;
+  document.getElementById("countdown").textContent = `🎄 Meno ${diff} Giorni a Natale`;
 }
 
-/* FOTO ASSOCIATA AL MESE / PERIODO */
+/* FOTO ASSOCIATA AL MESE / PERIODI */
 function caricaFotoDelMese() {
   const now = new Date();
   const mese = now.getMonth(); 
