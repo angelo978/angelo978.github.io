@@ -35,12 +35,13 @@
   /* MENU SINISTRA */
   #leftmenu {
     margin-bottom: 50px;
+    text-align: center;
   }
 
   #leftmenu a {
     color: #0f0;
     text-decoration: none;
-    margin: 0 20px;
+    margin: 0 10px;
     font-size: 2vw;
     text-shadow: 0 0 10px #0f0;
   }
@@ -79,6 +80,53 @@
     box-shadow: 0 0 20px #0f0;
   }
 
+  /* MAGIA PER SMARTPHONE IN VERTICALE: SCRITTE SOPRA, FOTO SOTTO */
+  @media (max-width: 768px) and (orientation: portrait) {
+    body {
+      overflow: auto; /* Permette lo scorrimento se lo schermo è piccolo */
+    }
+
+    #container {
+      flex-direction: column; /* Dispone gli elementi uno sotto l'altro */
+      height: auto;
+      min-height: 100%;
+    }
+
+    #left {
+      width: 100%;
+      padding: 30px 10px;
+      box-sizing: border-box;
+    }
+
+    #right {
+      width: 100%;
+      padding: 20px 10px 40px 10px;
+      box-sizing: border-box;
+    }
+
+    /* Adattamento dimensioni caratteri per il telefono in verticale */
+    #leftmenu a {
+      font-size: 4.5vw;
+      margin: 0 8px;
+    }
+
+    #clock {
+      font-size: 9vw;
+    }
+
+    #count1 {
+      font-size: 6vw;
+    }
+
+    #count2 {
+      font-size: 4.5vw;
+    }
+
+    #right img {
+      max-width: 85%;
+      max-height: 70vh;
+    }
+  }
 </style>
 </head>
 
@@ -86,7 +134,7 @@
 
 <div id="container">
 
-  <!-- SINISTRA -->
+  <!-- SINISTRA (Diventa la parte SOPRA in verticale) -->
   <div id="left">
 
     <div id="leftmenu">
@@ -101,7 +149,7 @@
     <div id="count2">Giorni a Natale</div>
   </div>
 
-  <!-- DESTRA -->
+  <!-- DESTRA (Diventa la parte SOTTO in verticale) -->
   <div id="right">
     <img id="fotoPinguino" src="" alt="Pinguino del giorno">
   </div>
