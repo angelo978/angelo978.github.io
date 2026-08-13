@@ -38,7 +38,8 @@
 
 <script>
   let index = 0;
-  // Assicurati che qui ci siano solo gli 9 file che hai effettivamente
+  
+  // Lista completa di tutte le scene
   const listaFoto = [
     "foto/pinguino0.png",
     "foto/pinguino1.png",
@@ -82,20 +83,26 @@
 
     imgElement.src = listaFoto[index];
     imgElement.style.display = "block";
-    // Ora segnerà 1 di 8, 2 di 8... fino a 8 di 8
+    // Mostra dinamicamente la posizione corretta basata sulla lunghezza reale dell'array
     statusElement.innerText = `Foto ${index + 1} di ${listaFoto.length}`;
   }
 
   function cambiaFoto(direzione) {
     index += direzione;
     
-    // Con questo controllo, se sei all'ultima (7) e premi avanti, torni alla prima (0)
-    if (index >= listaFoto.length) index = 0;
-    if (index < 0) index = listaFoto.length - 1;
+    // Se supera l'ultima foto, torna alla prima (0)
+    if (index >= listaFoto.length) {
+      index = 0;
+    }
+    // Se va prima della prima foto, passa all'ultima
+    if (index < 0) {
+      index = listaFoto.length - 1;
+    }
     
     mostraFoto();
   }
 
+  // Avvio iniziale della slideshow
   mostraFoto();
 </script>
 
