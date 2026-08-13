@@ -28,61 +28,70 @@
 
   #title { 
     margin-bottom: 15px; 
-    font-size: 2.2vw; 
+    font-size: 2vw; 
     text-shadow: 0 0 10px #0f0; 
     text-align: center;
   }
   
-  /* Area immagine e controlli */
+  /* Area immagine */
   .display-area { 
     display: flex; 
     align-items: center; 
     justify-content: center;
-    gap: 15px; 
     height: 65vh; 
     width: 100%;
+    position: relative;
   }
 
   #fotoPinguino { 
-    max-width: 65vw; 
+    max-width: 80vw; 
     max-height: 100%; 
     object-fit: contain; 
     border: 2px solid #0f0; 
     box-shadow: 0 0 20px #0f0; 
+    cursor: pointer;
   }
   
-  /* Bottoni */
-  button { 
-    background: transparent; 
+  /* Controlli touch / testuali puliti sotto o ai lati */
+  .nav-bar {
+    display: flex;
+    gap: 30px;
+    margin-top: 15px;
+  }
+
+  .nav-btn { 
     color: #0f0; 
-    border: 2px solid #0f0; 
-    padding: 15px 20px; 
-    font-size: 2vw; 
+    background: none;
+    border: none;
+    font-size: 1.8vw; 
     cursor: pointer; 
     text-shadow: 0 0 10px #0f0; 
+    font-family: monospace;
     font-weight: bold;
-    border-radius: 5px;
   }
   
-  button:hover { 
-    background: #0f0; 
-    color: #000; 
+  .nav-btn:hover { 
+    text-decoration: underline;
   }
 
   #status { 
-    margin-top: 15px; 
+    margin-top: 10px; 
     font-size: 1.8vw; 
     text-shadow: 0 0 10px #0f0; 
     min-height: 2vw; 
     text-align: center;
   }
 
-  a { 
+  .home-link { 
     color: #0f0; 
     margin-top: 15px; 
     text-decoration: none; 
     font-size: 1.5vw; 
     text-shadow: 0 0 10px #0f0; 
+  }
+  
+  .home-link:hover {
+    text-decoration: underline;
   }
 
   /* OTTIMIZZAZIONE PER SMARTPHONE IN VERTICALE */
@@ -100,21 +109,19 @@
     }
     .display-area {
       height: auto;
-      gap: 10px;
     }
     #fotoPinguino {
-      max-width: 75vw;
+      max-width: 90vw;
       max-height: 55vh;
     }
-    button {
-      font-size: 6vw;
-      padding: 12px 18px;
+    .nav-btn {
+      font-size: 5vw;
     }
     #status {
       font-size: 4.5vw;
     }
-    a {
-      font-size: 4vw;
+    .home-link {
+      font-size: 4.5vw;
       margin-top: 25px;
     }
   }
@@ -126,19 +133,22 @@
   <div id="title">🎞 Viaggio del Pinguino</div>
   
   <div class="display-area">
-    <button onclick="cambiaFoto(-1)">&lt;</button>
-    <img id="fotoPinguino" src="" alt="FINE">
-    <button onclick="cambiaFoto(1)">&gt;</button>
+    <!-- Cliccando direttamente sull'immagine si va avanti -->
+    <img id="fotoPinguino" src="" alt="FINE" onclick="cambiaFoto(1)" title="Clicca per la foto successiva">
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="cambiaFoto(-1)">&larr; Indietro</button>
+    <button class="nav-btn" onclick="cambiaFoto(1)">Avanti &rarr;</button>
   </div>
 
   <div id="status"></div>
-  <a href="index.html">⬅ Torna alla Home</a>
+  <a class="home-link" href="index.html">&larr; Torna alla Home</a>
 </div>
 
 <script>
   let index = 0;
   
-  // Lista completa e ordinata di tutte le scene (incluse normali e speciali)
   const listaFoto = [
     "foto/pinguino0.png",
     "foto/pinguino1.png",
@@ -177,7 +187,6 @@
     "foto/pinguino32.png"
   ];
 
-  // Elenco dei file considerati "speciali" da escludere dal conteggio numerico standard
   const fileSpeciali = [
     "foto/pinguino0.png",
     "foto/pinguino4s.png",
@@ -192,39 +201,31 @@
     imgElement.src = currentFile;
     imgElement.style.display = "block";
 
-    // Controlliamo se la foto attuale è una di quelle speciali
     if (fileSpeciali.includes(currentFile)) {
       statusElement.innerText = `⭐ Scena Speciale`;
     } else {
-      // Totale delle scene normali
       const totaleNormali = listaFoto.length - fileSpeciali.length;
-
-      // Calcoliamo il numero progressivo esatto della foto normale corrente
       let numeroCorrente = 0;
       for (let i = 0; i <= index; i++) {
         if (!fileSpeciali.includes(listaFoto[i])) {
           numeroCorrente++;
         }
       }
-
       statusElement.innerText = `Foto ${numeroCorrente} di ${totaleNormali}`;
     }
   }
 
   function cambiaFoto(direzione) {
     index += direzione;
-    
     if (index >= listaFoto.length) {
       index = 0;
     }
     if (index < 0) {
       index = listaFoto.length - 1;
     }
-    
     mostraFoto();
   }
 
-  // Avvio iniziale
   mostraFoto();
 </script>
 
