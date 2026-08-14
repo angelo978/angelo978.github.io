@@ -62,7 +62,8 @@
     font-size: 1.8vw;
     color: #0f0;
     text-shadow: 0 0 10px #0f0;
-    margin-top: 1vh;
+    margin-top: 2vh; /* SPAZIO EXTRA */
+    margin-bottom: 2vh; /* SPAZIO EXTRA */
   }
 
   /* DESTRA */
@@ -198,11 +199,13 @@ function caricaFotoDelMese() {
   document.getElementById("fotoPinguino").src = url;
 }
 
-/* CONTATORE VISITE (semplice e funziona sempre) */
-let visite = localStorage.getItem("visitePinguino") || 0;
-visite++;
-localStorage.setItem("visitePinguino", visite);
-document.getElementById("visitCounter").textContent = "Visite: " + visite;
+/* CONTATORE GLOBALE COUNTAPI */
+fetch("https://api.countapi.xyz/hit/pinguinoNataleGlobal/visite")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("visitCounter").textContent =
+      "Visite globali: " + data.value;
+  });
 
 setInterval(updateClock, 1000);
 updateClock();
