@@ -59,6 +59,13 @@
     white-space: nowrap;
   }
 
+  #visitCounter {
+    color: #0f0;
+    font-size: 1.8vw;
+    text-shadow: 0 0 10px #0f0;
+    margin-top: 1vh;
+  }
+
   /* DESTRA */
   #right {
     width: 50%;
@@ -123,7 +130,10 @@
       white-space: nowrap;
     }
 
-    /* FORZIAMO IL BORDO ANCHE SUL CELLULARE */
+    #visitCounter {
+      font-size: 3.5vw;
+    }
+
     #right img {
       max-width: 90%;
       max-height: 52vh;
@@ -138,7 +148,7 @@
 
 <div id="container">
 
-  <!-- SINISTRA (Parte SOPRA in verticale) -->
+  <!-- SINISTRA -->
   <div id="left">
     <div id="leftmenu">
       <a href="storia.html">Storia</a>
@@ -149,9 +159,12 @@
 
     <div id="clock">00:00:00</div>
     <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
+
+    <div id="visitCounter"></div>
+    <script src="https://www.freevisitorcounters.com/en/home/counter/123456/t/0"></script>
   </div>
 
-  <!-- DESTRA (Parte SOTTO in verticale) -->
+  <!-- DESTRA -->
   <div id="right">
     <img id="fotoPinguino" src="" alt="Pinguino del mese">
   </div>
@@ -173,14 +186,13 @@ function updateCountdown() {
   const today = new Date();
   const christmas = new Date(today.getFullYear(), 11, 25);
   const diff = Math.ceil((christmas - today) / (1000 * 60 * 60 * 24));
-
   document.getElementById("countdown").textContent = `🎄 Meno ${diff} Giorni a Natale`;
 }
 
-/* FOTO ASSOCIATA AL MESE / PERIODO */
+/* FOTO ASSOCIATA AL MESE */
 function caricaFotoDelMese() {
   const now = new Date();
-  const mese = now.getMonth(); 
+  const mese = now.getMonth();
   const giorno = now.getDate();
 
   let numeroFoto = 0;
@@ -188,7 +200,7 @@ function caricaFotoDelMese() {
   if (mese === 11 && giorno >= 24) {
     numeroFoto = 32;
   } else {
-    numeroFoto = Math.floor((mese / 11) * 31); 
+    numeroFoto = Math.floor((mese / 11) * 31);
   }
 
   const url = `foto/pinguino${numeroFoto}.png`;
