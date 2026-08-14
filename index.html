@@ -160,8 +160,7 @@
     <div id="clock">00:00:00</div>
     <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
 
-    <div id="visitCounter"></div>
-    <script src="https://www.freevisitorcounters.com/en/home/counter/123456/t/0"></script>
+    <div id="visitCounter">Visite: ...</div>
   </div>
 
   <!-- DESTRA -->
@@ -206,6 +205,14 @@ function caricaFotoDelMese() {
   const url = `foto/pinguino${numeroFoto}.png`;
   document.getElementById("fotoPinguino").src = url;
 }
+
+/* CONTATORE VISITE COUNTAPI */
+fetch("https://api.countapi.xyz/hit/pinguinoNatale/visite")
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("visitCounter").textContent =
+      "Visite: " + data.value;
+  });
 
 setInterval(updateClock, 1000);
 updateClock();
