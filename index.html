@@ -58,14 +58,6 @@
     white-space: nowrap;
   }
 
-  #visitCounter {
-    font-size: 1.8vw;
-    color: #0f0;
-    text-shadow: 0 0 10px #0f0;
-    margin-top: 2vh;
-    margin-bottom: 2vh; /* spazio extra */
-  }
-
   /* DESTRA */
   #right {
     width: 50%;
@@ -123,10 +115,6 @@
       font-size: 3.8vw;
     }
 
-    #visitCounter {
-      font-size: 3.5vw;
-    }
-
     #right img {
       max-width: 90%;
       max-height: 52vh;
@@ -152,8 +140,6 @@
 
     <div id="clock">00:00:00</div>
     <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
-
-    <div id="visitCounter">Visite globali: ...</div>
   </div>
 
   <!-- DESTRA -->
@@ -198,14 +184,6 @@ function caricaFotoDelMese() {
   const url = `foto/pinguino${numeroFoto}.png`;
   document.getElementById("fotoPinguino").src = url;
 }
-
-/* CONTATORE GLOBALE VERO */
-fetch("https://pinguino-counter.glitch.me/visite")
-  .then(r => r.json())
-  .then(data => {
-    document.getElementById("visitCounter").textContent =
-      "Visite globali: " + data.visite;
-  });
 
 setInterval(updateClock, 1000);
 updateClock();
