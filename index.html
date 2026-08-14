@@ -33,7 +33,6 @@
     overflow: hidden;
   }
 
-  /* MENU SINISTRA */
   #leftmenu {
     margin-bottom: 4vh;
     text-align: center;
@@ -60,8 +59,8 @@
   }
 
   #visitCounter {
-    color: #0f0;
     font-size: 1.8vw;
+    color: #0f0;
     text-shadow: 0 0 10px #0f0;
     margin-top: 1vh;
   }
@@ -84,7 +83,6 @@
     transition: opacity 0.5s ease-in-out;
   }
 
-  /* MAGIA PER SMARTPHONE IN VERTICALE */
   @media (max-width: 768px) and (orientation: portrait) {
     html, body {
       overflow: hidden;
@@ -111,10 +109,6 @@
       box-sizing: border-box;
     }
 
-    #leftmenu {
-      margin-bottom: 0;
-    }
-
     #leftmenu a {
       font-size: 3.8vw;
       margin: 0 4px;
@@ -122,12 +116,10 @@
 
     #clock {
       font-size: 6.5vw;
-      margin-bottom: 0;
     }
 
     #countdown {
       font-size: 3.8vw;
-      white-space: nowrap;
     }
 
     #visitCounter {
@@ -188,7 +180,7 @@ function updateCountdown() {
   document.getElementById("countdown").textContent = `🎄 Meno ${diff} Giorni a Natale`;
 }
 
-/* FOTO ASSOCIATA AL MESE */
+/* FOTO DEL MESE */
 function caricaFotoDelMese() {
   const now = new Date();
   const mese = now.getMonth();
@@ -206,13 +198,11 @@ function caricaFotoDelMese() {
   document.getElementById("fotoPinguino").src = url;
 }
 
-/* CONTATORE VISITE COUNTAPI */
-fetch("https://api.countapi.xyz/hit/pinguinoNatale/visite")
-  .then(r => r.json())
-  .then(data => {
-    document.getElementById("visitCounter").textContent =
-      "Visite: " + data.value;
-  });
+/* CONTATORE VISITE (semplice e funziona sempre) */
+let visite = localStorage.getItem("visitePinguino") || 0;
+visite++;
+localStorage.setItem("visitePinguino", visite);
+document.getElementById("visitCounter").textContent = "Visite: " + visite;
 
 setInterval(updateClock, 1000);
 updateClock();
