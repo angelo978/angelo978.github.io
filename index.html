@@ -62,8 +62,8 @@
     font-size: 1.8vw;
     color: #0f0;
     text-shadow: 0 0 10px #0f0;
-    margin-top: 2vh; /* SPAZIO EXTRA */
-    margin-bottom: 2vh; /* SPAZIO EXTRA */
+    margin-top: 2vh;
+    margin-bottom: 2vh; /* spazio extra */
   }
 
   /* DESTRA */
@@ -153,7 +153,7 @@
     <div id="clock">00:00:00</div>
     <div id="countdown">🎄 Meno 000 Giorni a Natale</div>
 
-    <div id="visitCounter">Visite: ...</div>
+    <div id="visitCounter">Visite globali: ...</div>
   </div>
 
   <!-- DESTRA -->
@@ -199,12 +199,12 @@ function caricaFotoDelMese() {
   document.getElementById("fotoPinguino").src = url;
 }
 
-/* CONTATORE GLOBALE COUNTAPI */
-fetch("https://api.countapi.xyz/hit/pinguinoNataleGlobal/visite")
+/* CONTATORE GLOBALE VERO */
+fetch("https://pinguino-counter.glitch.me/visite")
   .then(r => r.json())
   .then(data => {
     document.getElementById("visitCounter").textContent =
-      "Visite globali: " + data.value;
+      "Visite globali: " + data.visite;
   });
 
 setInterval(updateClock, 1000);
