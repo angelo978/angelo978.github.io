@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 La Storia del Pinguino di Natale - Libro</title>
+    <style>
+        /* RESET e stili generali */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f5f0eb;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #2c3e50;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .book-container {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #fffdfa;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+        }
+
+        /* COPERTINA */
+        .copertina {
+            text-align: center;
+            padding: 3rem 1rem 2rem 1rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(145deg, #1e3a5f, #0f2a44);
+            color: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .copertina h1 {
+            font-size: 3.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .copertina .sottotitolo {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .copertina .autore {
+            margin-top: 1.2rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.2rem;
+            display: inline-block;
+        }
+
+        /* STORIA (riassunto) */
+        .storia-section {
+            background-color: #f8f4f0;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border-left: 6px solid #1e3a5f;
+        }
+
+        .storia-section h2 {
+            margin-top: 0;
+            color: #1e3a5f;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .storia-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* INDICE */
+        .indice {
+            background-color: #f8f4f0;
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            border-left: 6px solid #1e3a5f;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .indice h2 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            color: #1e3a5f;
+        }
+
+        .indice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.3rem 1.5rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .indice-grid li {
+            padding: 0.2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .indice-grid a {
+            text-decoration: none;
+            color: #1e3a5f;
+            border-bottom: 1px dotted transparent;
+            transition: border-color 0.2s;
+        }
+
+        .indice-grid a:hover {
+            border-bottom-color: #1e3a5f;
+        }
+
+        /* STILE PER LE SCENE */
+        .scene {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            scroll-margin-top: 20px;
+        }
+
+        .scene img {
+            width: 40%;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .scene .testo {
+            width: 60%;
+        }
+
+        .scene .testo h3 {
+            margin-top: 0;
+            color: #1e3a5f;
+            font-size: 1.5rem;
+        }
+
+        .scene .testo p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+        }
+
+        /* SCENA INVERTITA (immagine a destra) */
+        .scene.invertita {
+            flex-direction: row-reverse;
+        }
+
+        /* SCENA SPECIALE (sfondo diverso) */
+        .scene.speciale {
+            background: #fef9f2;
+            border-left: 6px solid #e67e22;
+        }
+
+        /* SCENA FINALE (verde) */
+        .scene.finale {
+            background: #f0faf0;
+            border-left: 6px solid #27ae60;
+        }
+
+        /* TITOLO DI SEZIONE (se serve) */
+        .section-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px double #dcd3cc;
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #ddd6cf;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .footer a {
+            color: #1e3a5f;
+            text-decoration: none;
+        }
+
+        .torna-home {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 2rem;
+            background-color: #1e3a5f;
+            color: white;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .torna-home:hover {
+            background-color: #0f2a44;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .book-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .copertina h1 {
+                font-size: 2.2rem;
+            }
+
+            .copertina .sottotitolo {
+                font-size: 1.1rem;
+            }
+
+            .indice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scene {
+                flex-direction: column !important;
+                padding: 1rem;
+            }
+
+            .scene img,
+            .scene .testo {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="book-container">
+
+    <!-- ========================================================= -->
+    <!-- COPERTINA                                                  -->
+    <!-- ========================================================= -->
+    <div class="copertina">
+        <h1>🐧 La Storia del Pinguino di Natale</h1>
+        <p class="sottotitolo">Un'avventura natalizia attraverso l'Europa</p>
+        <!-- ⚠️ SOSTITUISCI "foto/locandina.jpg" con il percorso della tua immagine -->
+        <img src="foto/locandina.jpg" alt="Locandina del Pinguino" style="max-width:70%; margin-top:1.5rem; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+        <p class="autore">✍️ di Angelo978</p>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- STORIA (riassunto)                                        -->
+    <!-- ========================================================= -->
+    <div class="storia-section">
+        <h2>📖 La storia</h2>
+        <p>Il pinguino lavorava al Polo Nord come assistente di Babbo Natale. Un giorno, mentre faceva il figo registrando un video per i social, ha appoggiato la soletta magica della slitta di Babbo Natale sul tetto del magazzino "solo per un attimo".</p>
+        <p>Una raffica di vento artico ha preso la soletta e l'ha fatta volare via come un frisbee impazzito. La soletta ha attraversato mezzo mondo e si è schiantata in Portogallo, sulla spiaggia di Praia da Rocha.</p>
+        <p>Senza quella soletta: la slitta non vola, le renne non partono, il Natale non funziona, Babbo Natale non può consegnare i regali.</p>
+        <p><em>"Tu l'hai persa, tu la recuperi. E devi riportarla entro Natale."</em></p>
+        <p>Rintracciata dal monitor magico, il pinguino viene sparato col Cannone Natalizio in Portogallo. Il pinguino è quindi costretto a partire dal Portogallo e attraversare tutta l'Europa, scena dopo scena, lamentandosi sempre per tutto, trascinando la slitta rossa che non serve a niente finché non arriverà al Polo Nord.</p>
+        <p>Il suo obiettivo è uno solo: <strong>recuperare la soletta e riportarla a Babbo Natale prima della notte di Natale</strong>, così il mondo avrà i regali e lui non verrà retrocesso a pulire le stalle delle renne.</p>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- INDICE                                                    -->
+    <!-- ========================================================= -->
+    <div class="indice">
+        <h2>📑 Indice delle scene</h2>
+        <ul class="indice-grid">
+            <li><a href="#scena0">🏖️ 0 — L'inizio</a></li>
+            <li><a href="#scena1">🌴 1 — Spiaggia, Portogallo</a></li>
+            <li><a href="#scena2">🏜️ 2 — Deserto di Tabernas</a></li>
+            <li><a href="#scena3">🌾 3 — Camargue, Francia</a></li>
+            <li><a href="#scena4">🌺 4 — Collina dei papaveri</a></li>
+            <li><a href="#scena4s">🚗 4s — Panda 4x4</a></li>
+            <li><a href="#scena5">🏔️ 5 — Monviso / Traforo del Viso</a></li>
+            <li><a href="#scena6">🏞️ 6 — Ceresole Reale</a></li>
+            <li><a href="#scena7">🎿 7 — Cervinia</a></li>
+            <li><a href="#scena8">🏔️ 8 — Zermatt, Cervino</a></li>
+            <li><a href="#scena9">❄️ 9 — Interlaken, Jungfrau</a></li>
+            <li><a href="#scena10">🌉 10 — Lucerna, Kapellbrücke</a></li>
+            <li><a href="#scena11">🏰 11 — Innsbruck</a></li>
+            <li><a href="#scena12">🎼 12 — Salisburgo</a></li>
+            <li><a href="#scena12s">🚧 12s — Dogana</a></li>
+            <li><a href="#scena13">🍺 13 — Monaco</a></li>
+            <li><a href="#scena14">🏰 14 — Norimberga</a></li>
+            <li><a href="#scena15">🌬️ 15 — Amburgo</a></li>
+            <li><a href="#scena16">🛳️ 16 — Copenaghen</a></li>
+            <li><a href="#scena17">📚 17 — Odense</a></li>
+            <li><a href="#scena18">🌲 18 — Göteborg</a></li>
+            <li><a href="#scena19">🏝️ 19 — Stoccolma, arcipelago</a></li>
+            <li><a href="#scena20">⛪ 20 — Uppsala</a></li>
+            <li><a href="#scena21">🎅 21 — Rovaniemi</a></li>
+            <li><a href="#scena22">🌨️ 22 — Lapponia innevata</a></li>
+            <li><a href="#scena23">🧊 23 — Kiruna</a></li>
+            <li><a href="#scena24">🌌 24 — Tromsø</a></li>
+            <li><a href="#scena24a">🍣 24a — Arctic & Sushi</a></li>
+            <li><a href="#scena25">🌍 25 — Capo Nord</a></li>
+            <li><a href="#scena26">❄️ 26 — Mare di Barents</a></li>
+            <li><a href="#scena27">🧊 27 — Distese bianche infinite</a></li>
+            <li><a href="#scena28">🔵 28 — Ghiacciai blu</a></li>
+            <li><a href="#scena29">🌈 29 — Aurora sul ghiaccio</a></li>
+            <li><a href="#scena30">🥶 30 — Ultima salita artica</a></li>
+            <li><a href="#scena31">🎄 31 — POLO NORD</a></li>
+            <li><a href="#scena32">🎄🐧❄️ 32 — Il Gran Finale</a></li>
+        </ul>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- SCENE (da 0 a 32)                                         -->
+    <!-- ========================================================= -->
+    <h2 class="section-title">🌍 Le scene del viaggio</h2>
+
+    <!-- SCENA 0 - Special -->
+    <div id="scena0" class="scene speciale">
+        <img src="foto/scena0.jpg" alt="Praia da Rocha">
+        <div class="testo">
+            <h3>🏖️🐧 Scena 0 — Praia da Rocha, Portogallo</h3>
+            <p>"Il monitor magico di Babbo Natale ha tracciato la soletta, mi ha sparato in Portogallo col Cannone Natalizio in modalità acrobata dei ghiaggi." Finalmente ho trovato la soletta conficcata nella sabbia. Sembra un amuleto… ma pesa come un condizionatore. Perché non poteva essere un portachiavi?</p>
+        </div>
+    </div>
+
+    <!-- SCENA 1 -->
+    <div id="scena1" class="scene invertita">
+        <img src="foto/scena1.jpg" alt="Spiaggia in Portogallo">
+        <div class="testo">
+            <h3>🌴 1 — Spiaggia, Portogallo</h3>
+            <p>Ora che ho la soletta… devo riportarla al Polo Nord. Che gioia. "Sto fondendo come un gelato al sole, e la sabbia mi prende in giro."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 2 -->
+    <div id="scena2" class="scene">
+        <img src="foto/scena2.jpg" alt="Deserto di Tabernas">
+        <div class="testo">
+            <h3>🏜️ 2 — Deserto di Tabernas</h3>
+            <p>"Il sole mi sta cuocendo come un pollo, e il vento mi insulta in spagnolo."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 3 -->
+    <div id="scena3" class="scene invertita">
+        <img src="foto/scena3.jpg" alt="Camargue, Francia">
+        <div class="testo">
+            <h3>🌾 3 — Camargue, Francia</h3>
+            <p>"Questi fenicotteri mi guardano come se fossi un turista povero."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 4 -->
+    <div id="scena4" class="scene">
+        <img src="foto/scena4.jpg" alt="Collina dei papaveri">
+        <div class="testo">
+            <h3>🌺 4 — Collina dei papaveri</h3>
+            <p>"I papaveri mi giudicano, lo sento, sono troppo rossi apposta."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 4s - Special -->
+    <div id="scena4s" class="scene speciale invertita">
+        <img src="foto/scena4s.jpg" alt="Panda 4x4">
+        <div class="testo">
+            <h3>🚗🐧❄️ Scena 4s — Panda 4x4</h3>
+            <p>Il pinguino sta lasciando la Francia, arrabbiato e sudato, trascinando la slitta rossa che pesa come un trattore. Sta per entrare in Italia, e già si lamenta: "Scommetto che qui sarà ancora più caldo…"</p>
+            <p>All'improvviso sente un rumore: BRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR</p>
+            <p>Si gira. Ed eccola: la Panda 4x4 "3 Pinguini Climatizzatore – Special Forces", bianca, con i tre pinguini disegnati sul cofano e sulla fiancata. Dal cofano esce aria gelida come un freezer industriale.</p>
+            <p>"MA COME?! IO MUOIO DI CALDO E QUESTA PANDA FA PIÙ FREDDO DEL POLO NORD?!?"</p>
+            <p>La Panda si ferma. Si apre la portiera. Esce un vecchio montanaro con la barba bianca e gli occhiali da sole. "Qui si viaggia solo in modalità ARTICO."</p>
+            <p>Il pinguino entra. Dentro è -12°C. Un paradiso. "FINALMENTE QUALCUNO CHE CAPISCE LA MIA SOFFERENZA!"</p>
+            <p>La Panda lo porta fino in cima del Monviso, con il climatizzatore che spara gelo come un uragano polare. Arrivati al confine, il montanaro gli dice: "Da qui prosegui a piedi. La Panda va dove serve il freddo."</p>
+            <p>La Panda riparte, sparendo tra i tornanti come un mito alpino. Il pinguino resta lì, tremante di freddo e felicità, e mormora: "Era l'unico momento bello del viaggio… ovviamente è già finito."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 5 -->
+    <div id="scena5" class="scene">
+        <img src="foto/scena5.jpg" alt="Monviso">
+        <div class="testo">
+            <h3>🏔️ 5 — Monviso / Traforo del Viso</h3>
+            <p>"Questa montagna è troppo alta per dispetto, lo fa apposta."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 6 -->
+    <div id="scena6" class="scene invertita">
+        <img src="foto/scena6.jpg" alt="Ceresole Reale">
+        <div class="testo">
+            <h3>🏞️ 6 — Ceresole Reale</h3>
+            <p>"L'acqua è troppo limpida, mi dà fastidio agli occhi."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 7 -->
+    <div id="scena7" class="scene">
+        <img src="foto/scena7.jpg" alt="Cervinia">
+        <div class="testo">
+            <h3>🎿 7 — Cervinia</h3>
+            <p>"Questi sciatori fanno i fighi, ma io ho la slitta che pesa come un trattore."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 8 -->
+    <div id="scena8" class="scene invertita">
+        <img src="foto/scena8.jpg" alt="Cervino">
+        <div class="testo">
+            <h3>🏔️ 8 — Zermatt, Cervino</h3>
+            <p>"Il Cervino è troppo perfetto, sembra photoshoppato, mi irrita."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 9 -->
+    <div id="scena9" class="scene">
+        <img src="foto/scena9.jpg" alt="Jungfrau">
+        <div class="testo">
+            <h3>❄️ 9 — Interlaken, Jungfrau</h3>
+            <p>"Il ghiacciaio scricchiola per provocarmi, lo so."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 10 -->
+    <div id="scena10" class="scene invertita">
+        <img src="foto/scena10.jpg" alt="Kapellbrücke">
+        <div class="testo">
+            <h3>🌉 10 — Lucerna, Kapellbrücke</h3>
+            <p>"Questo ponte è troppo antico, mi fa sentire giovane e scemo."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 11 -->
+    <div id="scena11" class="scene">
+        <img src="foto/scena11.jpg" alt="Innsbruck">
+        <div class="testo">
+            <h3>🏰 11 — Innsbruck</h3>
+            <p>"Le montagne qui mi fissano come se fossi un intruso."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 12 -->
+    <div id="scena12" class="scene invertita">
+        <img src="foto/scena12.jpg" alt="Salisburgo">
+        <div class="testo">
+            <h3>🎼 12 — Salisburgo</h3>
+            <p>"Mozart ovunque, non posso fare un passo senza sentire un do maggiore."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 12s - Special -->
+    <div id="scena12s" class="scene speciale">
+        <img src="foto/scena12s.jpg" alt="Dogana">
+        <div class="testo">
+            <h3>🚧🐧❄️ Scena 12s — Dogana</h3>
+            <p>Il pinguino, dopo aver attraversato l'Austria, arriva al confine tedesco trascinando la sua slitta rossa carica di pere. Davanti a lui, una barriera con la scritta ZOLL e un doganiere tedesco dall'aria severa. Il doganiere lo squadra, controlla la slitta e borbotta: "Questo veicolo a trazione animale non conforme."</p>
+            <p>Il pinguino, già sudato e infastidito, sbotta: "Qui la dogana è troppo fiscale!" Il doganiere resta impassibile, mentre il pinguino trascina la slitta oltre il confine, lamentandosi per ogni metro di strada. "Ma guarda te… pure la burocrazia mi perseguita!"</p>
+        </div>
+    </div>
+
+    <!-- SCENA 13 -->
+    <div id="scena13" class="scene invertita">
+        <img src="foto/scena13.jpg" alt="Monaco">
+        <div class="testo">
+            <h3>🍺 13 — Monaco</h3>
+            <p>"Tutti bevono birra tranne me, mi sento discriminato."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 14 -->
+    <div id="scena14" class="scene">
+        <img src="foto/scena14.jpg" alt="Norimberga">
+        <div class="testo">
+            <h3>🏰 14 — Norimberga</h3>
+            <p>"Il castello è troppo grande, mi mette ansia."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 15 -->
+    <div id="scena15" class="scene invertita">
+        <img src="foto/scena15.jpg" alt="Amburgo">
+        <div class="testo">
+            <h3>🌬️ 15 — Amburgo</h3>
+            <p>"Il vento mi spinge sempre dalla parte sbagliata, è personale."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 16 -->
+    <div id="scena16" class="scene">
+        <img src="foto/scena16.jpg" alt="Copenaghen">
+        <div class="testo">
+            <h3>🛳️ 16 — Copenaghen</h3>
+            <p>"La Sirenetta non mi saluta, che maleducata."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 17 -->
+    <div id="scena17" class="scene invertita">
+        <img src="foto/scena17.jpg" alt="Odense">
+        <div class="testo">
+            <h3>📚 17 — Odense</h3>
+            <p>"Le fiabe di Andersen sono troppo tristi, mi deprimono."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 18 -->
+    <div id="scena18" class="scene">
+        <img src="foto/scena18.jpg" alt="Göteborg">
+        <div class="testo">
+            <h3>🌲 18 — Göteborg</h3>
+            <p>"Le foreste qui sono troppo silenziose, mi fanno sentire osservato."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 19 -->
+    <div id="scena19" class="scene invertita">
+        <img src="foto/scena19.jpg" alt="Stoccolma">
+        <div class="testo">
+            <h3>🏝️ 19 — Stoccolma, arcipelago</h3>
+            <p>"Ci sono troppe isole, non posso contarle tutte, mi stressa."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 20 -->
+    <div id="scena20" class="scene">
+        <img src="foto/scena20.jpg" alt="Uppsala">
+        <div class="testo">
+            <h3>⛪ 20 — Uppsala</h3>
+            <p>"La cattedrale è troppo alta, mi fa venire il torcicollo."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 21 -->
+    <div id="scena21" class="scene invertita">
+        <img src="foto/scena21.jpg" alt="Rovaniemi">
+        <div class="testo">
+            <h3>🎅 21 — Rovaniemi</h3>
+            <p>"Babbo Natale non è in ufficio, che servizio clienti scadente."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 22 -->
+    <div id="scena22" class="scene">
+        <img src="foto/scena22.jpg" alt="Lapponia innevata">
+        <div class="testo">
+            <h3>🌨️ 22 — Lapponia innevata</h3>
+            <p>"La neve cade con arroganza, mi prende di mira."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 23 -->
+    <div id="scena23" class="scene invertita">
+        <img src="foto/scena23.jpg" alt="Kiruna">
+        <div class="testo">
+            <h3>🧊 23 — Kiruna</h3>
+            <p>"Il sole di mezzanotte mi confonde, non so quando dormire."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 24 -->
+    <div id="scena24" class="scene">
+        <img src="foto/scena24.jpg" alt="Tromsø">
+        <div class="testo">
+            <h3>🌌 24 — Tromsø</h3>
+            <p>"L'aurora boreale fa troppo la diva, tutta luminosa."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 24a - Special -->
+    <div id="scena24a" class="scene speciale invertita">
+        <img src="foto/scena24a.jpg" alt="Arctic & Sushi">
+        <div class="testo">
+            <h3>🍣🐧❄️ Scena 24a — ARCTIC & SUSHI</h3>
+            <p>Lungo la strada innevata che porta dritta a Nord (indicata dai cartelli per la E69 e Nordkapp), il pinguino nota una piccola e bizzarra costruzione in legno grezzo affacciata sul ghiaccio: il chiosco "Arctic & Sushi".</p>
+            <p>Fuori c'è un cartello in legno ben in vista: "OGGI: SALMONE FRESCO DEL FINNMARK E RICCI DI MARE ARTICI"</p>
+            <p>Il pinguino, con la sua fida slitta carica di frutti di bosco e ribes, si siede sulla panchetta di legno gelata. Con le bacchette in zampa cerca di afferrare un pezzo di sushi dal vassoio, ma l'equilibrio è pessimo.</p>
+            <p>Dentro il chiosco, un abitante locale con i tradizionali abiti Sami sorride bonario osservando la scena. Il pinguino, visibilmente irritato e con le bacchette che tremano, sbotta guardando il vassoio: "MA PERCHÉ SONO COSÍ SCOMODE?!"</p>
+            <p>Un pitstop gastronomico estremo prima di rimettersi in marcia verso il gelo più profondo.</p>
+        </div>
+    </div>
+
+    <!-- SCENA 25 -->
+    <div id="scena25" class="scene">
+        <img src="foto/scena25.jpg" alt="Capo Nord">
+        <div class="testo">
+            <h3>🌍 25 — Capo Nord</h3>
+            <p>"È il punto più a nord, ma non c'è neanche un bar."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 26 -->
+    <div id="scena26" class="scene invertita">
+        <img src="foto/scena26.jpg" alt="Mare di Barents">
+        <div class="testo">
+            <h3>❄️ 26 — Mare di Barents</h3>
+            <p>"Il ghiaccio galleggia male, sembra ubriaco."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 27 -->
+    <div id="scena27" class="scene">
+        <img src="foto/scena27.jpg" alt="Distese bianche">
+        <div class="testo">
+            <h3>🧊 27 — Distese bianche infinite</h3>
+            <p>"Troppa neve, non c'è un cartello, mi perdo."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 28 -->
+    <div id="scena28" class="scene invertita">
+        <img src="foto/scena28.jpg" alt="Ghiacciai blu">
+        <div class="testo">
+            <h3>🔵 28 — Ghiacciai blu</h3>
+            <p>"Il ghiaccio blu sembra che voglia farmi sentire inadeguato."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 29 -->
+    <div id="scena29" class="scene">
+        <img src="foto/scena29.jpg" alt="Aurora sul ghiaccio">
+        <div class="testo">
+            <h3>🌈 29 — Aurora sul ghiaccio</h3>
+            <p>"Il cielo fa lo spettacolo e io pago il biglietto col freddo."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 30 -->
+    <div id="scena30" class="scene invertita">
+        <img src="foto/scena30.jpg" alt="Ultima salita artica">
+        <div class="testo">
+            <h3>🥶 30 — Ultima salita artica</h3>
+            <p>"Il vento mi schiaffeggia, non è educato."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 31 -->
+    <div id="scena31" class="scene">
+        <img src="foto/scena31.jpg" alt="Polo Nord">
+        <div class="testo">
+            <h3>🎄 31 — POLO NORD</h3>
+            <p>"Ho fatto tutto sto viaggio e non c'è neanche un McDonald's."</p>
+        </div>
+    </div>
+
+    <!-- SCENA 32 - Gran Finale -->
+    <div id="scena32" class="scene finale invertita">
+        <img src="foto/scena32.jpg
