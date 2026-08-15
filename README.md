@@ -1,15 +1,13 @@
 # 🐧 La Storia del Pinguino di Natale
 
-Una storia interattiva di Natale con 36 scene (4 speciali), vignette e un pinguino brontolone che attraversa l'Europa per salvare il Natale.
+Una storia interattiva di Natale con 36 scene (5 speciali), vignette e un pinguino brontolone che attraversa l'Europa per salvare il Natale.
 
-## 📖 La trama
+📖 La trama
+Il pinguino, assistente di Babbo Natale, perde la soletta magica della slitta e deve recuperarla in Portogallo. Attraversa mezza Europa lamentandosi per tutto, trascinando una slitta che non serve a niente... fino al gran finale (Scena 32 Special).
 
-Il pinguino, assistente di Babbo Natale, perde la soletta magica della slitta e deve recuperarla in Portogallo. Attraversa mezza Europa lamentandosi per tutto, trascinando una slitta che non serve a niente... fino al gran finale.
-
-## 🎯 Caratteristiche
-
+🎯 Caratteristiche
 - 36 scene con illustrazioni
-- 4 episodi speciali
+- 5 episodi speciali (di cui uno è il finale)
 - Slideshow delle vignette
 - Senza link ipertestuali: esplorazione attiva
 
