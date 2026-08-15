@@ -65,6 +65,13 @@
             display: inline-block;
         }
 
+        .copertina img.locandina {
+            max-width: 70%;
+            margin-top: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
         /* STORIA (riassunto) */
         .storia-section {
             background-color: #f8f4f0;
@@ -93,7 +100,6 @@
             border-radius: 16px;
             margin-bottom: 3rem;
             border-left: 6px solid #1e3a5f;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
         }
 
         .indice h2 {
@@ -120,7 +126,6 @@
             text-decoration: none;
             color: #1e3a5f;
             border-bottom: 1px dotted transparent;
-            transition: border-color 0.2s;
         }
 
         .indice-grid a:hover {
@@ -144,7 +149,7 @@
             width: 40%;
             border-radius: 12px;
             object-fit: cover;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .scene .testo {
@@ -163,24 +168,20 @@
             margin-bottom: 0.8rem;
         }
 
-        /* SCENA INVERTITA (immagine a destra) */
         .scene.invertita {
             flex-direction: row-reverse;
         }
 
-        /* SCENA SPECIALE (sfondo diverso) */
         .scene.speciale {
             background: #fef9f2;
             border-left: 6px solid #e67e22;
         }
 
-        /* SCENA FINALE (verde) */
         .scene.finale {
             background: #f0faf0;
             border-left: 6px solid #27ae60;
         }
 
-        /* TITOLO DI SEZIONE (se serve) */
         .section-title {
             font-size: 2.2rem;
             text-align: center;
@@ -213,43 +214,32 @@
             border-radius: 40px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.2s;
         }
 
         .torna-home:hover {
             background-color: #0f2a44;
         }
 
-        /* RESPONSIVE */
         @media (max-width: 700px) {
             .book-container {
                 padding: 1.5rem 1rem;
             }
-
             .copertina h1 {
                 font-size: 2.2rem;
             }
-
             .copertina .sottotitolo {
                 font-size: 1.1rem;
             }
-
             .indice-grid {
                 grid-template-columns: 1fr;
             }
-
             .scene {
                 flex-direction: column !important;
                 padding: 1rem;
             }
-
             .scene img,
             .scene .testo {
                 width: 100%;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
             }
         }
     </style>
@@ -264,8 +254,8 @@
     <div class="copertina">
         <h1>🐧 La Storia del Pinguino di Natale</h1>
         <p class="sottotitolo">Un'avventura natalizia attraverso l'Europa</p>
-        <!-- ⚠️ SOSTITUISCI "foto/locandina.jpg" con il percorso della tua immagine -->
-        <img src="foto/locandina.jpg" alt="Locandina del Pinguino" style="max-width:70%; margin-top:1.5rem; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.4);">
+        <!-- ⚠️ QUI LA TUA LOCANDINA: se non hai ancora l'immagine, commenta questa riga -->
+        <img class="locandina" src="foto/locandina.jpg" alt="Locandina del Pinguino">
         <p class="autore">✍️ di Angelo978</p>
     </div>
 
@@ -661,4 +651,9 @@
 
     <!-- SCENA 32 - Gran Finale -->
     <div id="scena32" class="scene finale invertita">
-        <img src="foto/scena32.jpg
+        <img src="foto/scena32.jpg" alt="Il Gran Finale">
+        <div class="testo">
+            <h3>🎄🐧❄️ Scena 32 — Il Gran Finale</h3>
+            <p>Il pinguino è arrivato davanti alla porta del laboratorio di Babbo Natale. È stravolto, ha il cappello storto e la slitta è ormai un rottame che cigola.</p>
+            <p>Entra. Babbo Natale è lì, con le renne che lo guardano male perché non possono partire.</p>
+            <p
